@@ -14,13 +14,10 @@ MainWindow::MainWindow(QWidget *parent)
     , ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
-    ui->label->setText("Hello World!");
     string_sub_ = nh_.subscribe("image", 10, &MainWindow::callbackImage, this);
 
-    QVBoxLayout *layout = new QVBoxLayout();
     w = new ImageCropper;
-    layout->addWidget(w);
-    ui->centralwidget->setLayout(layout);
+    ui->verticalLayout->addWidget(w);
 }
 
 MainWindow::~MainWindow()
@@ -29,12 +26,21 @@ MainWindow::~MainWindow()
 }
 
 void MainWindow::callbackImage(const sensor_msgs::Image::ConstPtr& msg) {
-    ui->label->setText("Sub!");
     cv_bridge::CvImageConstPtr cv_ptr = cv_bridge::toCvShare(msg, sensor_msgs::image_encodings::RGB8);
     cv::Mat mat = cv_ptr->image;
     QImage image(mat.data, mat.cols, mat.rows, mat.step[0], QImage::Format_RGB888);
-    QPixmap pixmap = QPixmap::fromImage(image);
-    w->setImage(pixmap);
+    pixmap = QPixmap::fromImage(image);
     //ui->label->setPixmap(pixmap.scaled(ui->label->size(), Qt::KeepAspectRatio, Qt::SmoothTransformation));
 }
 
+
+void MainWindow::on_pushButton_clicked()
+{
+    w->setImage(pixmap);
+}
+
+void MainWindow::on_cropButton_clicked()
+{
+    QPixmap croppedImage = w->cropImage();
+    ui->label->setPixmap(croppedImage);
+}
