@@ -26,6 +26,7 @@ void MainWindow::callbackImage(const sensor_msgs::Image::ConstPtr& msg) {
     cv_bridge::CvImageConstPtr cv_ptr = cv_bridge::toCvShare(msg, sensor_msgs::image_encodings::RGB8);
     cv::Mat mat = cv_ptr->image;
     QImage image(mat.data, mat.cols, mat.rows, mat.step[0], QImage::Format_RGB888);
-    ui->label->setPixmap(QPixmap::fromImage(image));
+    QPixmap pixmap = QPixmap::fromImage(image);
+    ui->label->setPixmap(pixmap.scaled(ui->label->size(), Qt::KeepAspectRatio, Qt::SmoothTransformation));
 }
 
