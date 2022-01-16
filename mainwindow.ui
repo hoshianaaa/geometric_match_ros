@@ -27,10 +27,13 @@
      <enum>QFrame::WinPanel</enum>
     </property>
     <property name="text">
-     <string>TextLabel</string>
+     <string/>
     </property>
     <property name="scaledContents">
      <bool>false</bool>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignCenter</set>
     </property>
     <property name="wordWrap">
      <bool>false</bool>
