@@ -9,6 +9,8 @@
 #include "./imagecropper/imagecropper.h"
 #include <QVBoxLayout>
 
+#include <iostream>
+
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)
@@ -43,7 +45,8 @@ void MainWindow::on_cropButton_clicked()
 {
     QPixmap pixmap = w->cropImage();
     QImage image(pixmap.toImage().convertToFormat(QImage::Format_RGB888));
-    cv::Mat mat(image.height(), image.width(), CV_8UC3, (cv::Scalar*)image.scanLine(0));
+    std::cout << image.format() << std::endl;
+    cv::Mat mat = cv::Mat(image.height(), image.width(), CV_8UC3, (void*)image.constBits(), image.bytesPerLine());
     cv::imshow("image",mat);
-    ui->label->setPixmap(pixmap);
+    ui->label->setPixmap(QPixmap::fromImage(image));
 }
