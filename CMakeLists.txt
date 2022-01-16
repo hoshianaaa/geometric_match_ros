@@ -25,6 +25,10 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 #endif()
 
 find_package(Qt5 COMPONENTS Widgets REQUIRED)
+find_package( roscpp )
+include_directories(
+ ${roscpp_INCLUDE_DIRS}
+)
 
 if(ANDROID)
   add_library(geometric_match_ros SHARED
@@ -42,4 +46,4 @@ else()
   )
 endif()
 
-target_link_libraries(geometric_match_ros PRIVATE Qt5::Widgets)
+target_link_libraries(geometric_match_ros PRIVATE Qt5::Widgets ${roscpp_LIBRARIES})
