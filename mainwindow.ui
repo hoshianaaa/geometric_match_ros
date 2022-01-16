@@ -18,6 +18,13 @@
     <item>
      <layout class="QVBoxLayout" name="verticalLayout">
       <item>
+       <widget class="QPushButton" name="pushButton">
+        <property name="text">
+         <string>update image</string>
+        </property>
+       </widget>
+      </item>
+      <item>
        <widget class="QPushButton" name="cropButton">
         <property name="text">
          <string>crop</string>
@@ -27,16 +34,16 @@
      </layout>
     </item>
     <item>
-     <widget class="QPushButton" name="pushButton">
+     <widget class="QLabel" name="label">
       <property name="text">
-       <string>templateSetting</string>
+       <string>template</string>
       </property>
      </widget>
     </item>
     <item>
-     <widget class="QLabel" name="label">
+     <widget class="QLabel" name="label_2">
       <property name="text">
-       <string/>
+       <string>search</string>
       </property>
      </widget>
     </item>

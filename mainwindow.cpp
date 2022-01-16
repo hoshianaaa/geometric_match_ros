@@ -32,7 +32,7 @@ void MainWindow::callbackImage(const sensor_msgs::Image::ConstPtr& msg) {
     cv::Mat mat = cv_ptr->image;
     QImage image(mat.data, mat.cols, mat.rows, mat.step[0], QImage::Format_RGB888);
     pixmap = QPixmap::fromImage(image);
-    //ui->label->setPixmap(pixmap.scaled(ui->label->size(), Qt::KeepAspectRatio, Qt::SmoothTransformation));
+    ui->label_2->setPixmap(pixmap.scaled(ui->label->size(), Qt::KeepAspectRatio, Qt::SmoothTransformation));
 }
 
 
