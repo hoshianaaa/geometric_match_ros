@@ -30,9 +30,17 @@ MainWindow::~MainWindow()
 void MainWindow::callbackImage(const sensor_msgs::Image::ConstPtr& msg) {
     cv_bridge::CvImageConstPtr cv_ptr = cv_bridge::toCvShare(msg, sensor_msgs::image_encodings::RGB8);
     cv::Mat mat = cv_ptr->image;
+
     QImage image(mat.data, mat.cols, mat.rows, mat.step[0], QImage::Format_RGB888);
     pixmap = QPixmap::fromImage(image);
-    ui->label_2->setPixmap(pixmap.scaled(ui->label->size(), Qt::KeepAspectRatio, Qt::SmoothTransformation));
+
+    cv::cvtColor(mat, mat,CV_RGB2GRAY);
+    cv::Canny(mat, mat, 50, 100);
+    cv::cvtColor(mat, mat,CV_GRAY2RGB);
+
+    QImage image2(mat.data, mat.cols, mat.rows, mat.step[0], QImage::Format_RGB888);
+    QPixmap pixmap2 = QPixmap::fromImage(image2);
+    ui->label_2->setPixmap(pixmap2.scaled(ui->label->size(), Qt::KeepAspectRatio, Qt::SmoothTransformation));
 }
 
 
