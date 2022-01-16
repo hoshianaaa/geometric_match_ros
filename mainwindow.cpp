@@ -45,8 +45,16 @@ void MainWindow::on_cropButton_clicked()
 {
     QPixmap pixmap = w->cropImage();
     QImage image(pixmap.toImage().convertToFormat(QImage::Format_RGB888));
-    std::cout << image.format() << std::endl;
+
+    // qimage to cv::mat (参考) https://www.codetd.com/ja/article/6620060
     cv::Mat mat = cv::Mat(image.height(), image.width(), CV_8UC3, (void*)image.constBits(), image.bytesPerLine());
-    cv::imshow("image",mat);
-    ui->label->setPixmap(QPixmap::fromImage(image));
+
+    cv::cvtColor(mat, mat,CV_RGB2GRAY);
+    cv::Canny(mat, mat, 50, 100);
+    cv::cvtColor(mat, mat,CV_GRAY2RGB);
+
+    QImage image2(mat.data, mat.cols, mat.rows, mat.step[0], QImage::Format_RGB888);
+    pixmap = QPixmap::fromImage(image2);
+
+    ui->label->setPixmap(pixmap);
 }
