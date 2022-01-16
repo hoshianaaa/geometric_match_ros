@@ -41,6 +41,9 @@ void MainWindow::on_pushButton_clicked()
 
 void MainWindow::on_cropButton_clicked()
 {
-    QPixmap croppedImage = w->cropImage();
-    ui->label->setPixmap(croppedImage);
+    QPixmap pixmap = w->cropImage();
+    QImage image(pixmap.toImage().convertToFormat(QImage::Format_RGB888));
+    cv::Mat mat(image.height(), image.width(), CV_8UC3, (cv::Scalar*)image.scanLine(0));
+    cv::imshow("image",mat);
+    ui->label->setPixmap(pixmap);
 }
