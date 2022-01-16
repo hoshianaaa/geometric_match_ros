@@ -25,9 +25,16 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 #endif()
 
 find_package(Qt5 COMPONENTS Widgets REQUIRED)
-find_package( roscpp )
+find_package(roscpp)
+find_package(cv_bridge)
+find_package(sensor_msgs)
+find_package(OpenCV)
+
 include_directories(
  ${roscpp_INCLUDE_DIRS}
+ ${cv_bridge_INCLUDE_DIRS}
+ ${OpenCV_INCLUDE_DIRS}
+ ${sensor_msgs_INCLUDE_DIRS}
 )
 
 if(ANDROID)
@@ -46,4 +53,4 @@ else()
   )
 endif()
 
-target_link_libraries(geometric_match_ros PRIVATE Qt5::Widgets ${roscpp_LIBRARIES})
+target_link_libraries(geometric_match_ros PRIVATE Qt5::Widgets ${roscpp_LIBRARIES} ${cv_bridge_LIBRARIES} ${OpenCV_LIBRARIES} ${sensor_msgs_LIBRARIES})

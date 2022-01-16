@@ -3,6 +3,9 @@
 
 #include <QMainWindow>
 
+#include <ros/ros.h>
+#include <sensor_msgs/Image.h>
+
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
 QT_END_NAMESPACE
@@ -17,5 +20,9 @@ public:
 
 private:
     Ui::MainWindow *ui;
+    ros::NodeHandle nh_;
+    ros::Subscriber string_sub_;
+    void callbackImage(const sensor_msgs::Image::ConstPtr& msg);
 };
 #endif // MAINWINDOW_H
+
