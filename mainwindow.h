@@ -6,6 +6,8 @@
 #include <ros/ros.h>
 #include <sensor_msgs/Image.h>
 
+#include "./imagecropper/imagecropper.h"
+
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
 QT_END_NAMESPACE
@@ -23,6 +25,7 @@ private:
     ros::NodeHandle nh_;
     ros::Subscriber string_sub_;
     void callbackImage(const sensor_msgs::Image::ConstPtr& msg);
+    ImageCropper *w;
 };
 #endif // MAINWINDOW_H
 

@@ -50,6 +50,12 @@ else()
     mainwindow.cpp
     mainwindow.h
     mainwindow.ui
+
+    imagecropper/imagecropper.h # add
+    imagecropper/imagecropper.cpp # add
+    imagecropper/imagecropper_e.h # add
+    imagecropper/imagecropper_p.h # add
+
   )
 endif()
 
