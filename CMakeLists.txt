@@ -56,6 +56,7 @@ else()
     imagecropper/imagecropper_e.h # add
     imagecropper/imagecropper_p.h # add
 
+    algorithm/geomatch.h # add
   )
 endif()
 

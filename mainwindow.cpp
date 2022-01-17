@@ -11,6 +11,8 @@
 
 #include <iostream>
 
+#include "./algorithm/geomatch.h"
+
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)
@@ -35,8 +37,10 @@ void MainWindow::callbackImage(const sensor_msgs::Image::ConstPtr& msg) {
     pixmap = QPixmap::fromImage(image);
 
     cv::cvtColor(mat, mat,CV_RGB2GRAY);
-    cv::Canny(mat, mat, 50, 100);
-    cv::cvtColor(mat, mat,CV_GRAY2RGB);
+
+    func(template_img_, mat, 50, 100, 50, 100);
+    //cv::Canny(mat, mat, 50, 100);
+    //cv::cvtColor(mat, mat,CV_GRAY2RGB);
 
     QImage image2(mat.data, mat.cols, mat.rows, mat.step[0], QImage::Format_RGB888);
     QPixmap pixmap2 = QPixmap::fromImage(image2);
@@ -58,8 +62,9 @@ void MainWindow::on_cropButton_clicked()
     cv::Mat mat = cv::Mat(image.height(), image.width(), CV_8UC3, (void*)image.constBits(), image.bytesPerLine());
 
     cv::cvtColor(mat, mat,CV_RGB2GRAY);
-    cv::Canny(mat, mat, 50, 100);
-    cv::cvtColor(mat, mat,CV_GRAY2RGB);
+    template_img_ = mat;
+    //cv::Canny(mat, mat, 50, 100);
+    //cv::cvtColor(mat, mat,CV_GRAY2RGB);
 
     QImage image2(mat.data, mat.cols, mat.rows, mat.step[0], QImage::Format_RGB888);
     pixmap = QPixmap::fromImage(image2);
