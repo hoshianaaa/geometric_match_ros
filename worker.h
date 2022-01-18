@@ -62,6 +62,8 @@ private:
      */
     QMutex mutex;
 
+    cv::Mat template_img_, search_img_;
+
 signals:
     /**
      * @brief This signal is emitted when the Worker request to Work
@@ -87,9 +89,11 @@ public slots:
     void doWork();
     void setTemplateImage(cv::Mat mat){
         std::cout << "set template image" << std::endl;
+        template_img_ = mat;
     }
     void setSearchImage(cv::Mat mat){
         std::cout << "set search image" << std::endl;
+        search_img_ = mat;
     }
 };
 

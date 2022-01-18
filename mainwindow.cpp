@@ -11,8 +11,6 @@
 
 #include <iostream>
 
-#include "./algorithm/geomatch.h"
-
 #include <QDebug>
 
 MainWindow::MainWindow(QWidget *parent)
@@ -91,6 +89,7 @@ void MainWindow::on_cropButton_clicked()
 
     cv::cvtColor(mat, mat,CV_RGB2GRAY);
     template_img_ = mat;
+    worker->setTemplateImage(mat);
     //cv::Canny(mat, mat, 50, 100);
     //cv::cvtColor(mat, mat,CV_GRAY2RGB);
 

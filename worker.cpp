@@ -28,6 +28,8 @@
 
 #include <iostream>
 
+#include "./algorithm/geomatch.h"
+
 Worker::Worker(QObject *parent) :
     QObject(parent)
 {
@@ -71,12 +73,7 @@ void Worker::doWork()
             break;
         }
 
-        for (int j=0;j<100000000;j++){
-            // Checks if the process should be aborted
-
-            //std::cout << "hello" << i << std::endl;
-            i++;
-        }
+        func(this->template_img_, this->search_img_, 50, 100, 50, 100);
 
         emit valueChanged(QString::number(i));
     }
