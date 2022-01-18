@@ -10,6 +10,9 @@
 
 #include <opencv2/opencv.hpp>
 
+#include <QThread>
+#include "worker.h"
+
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
 QT_END_NAMESPACE
@@ -35,6 +38,9 @@ private:
     ImageCropper *w;
     QPixmap pixmap;
     cv::Mat template_img_;
+
+    QThread *thread;
+    Worker *worker;
 };
 #endif // MAINWINDOW_H
 

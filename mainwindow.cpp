@@ -13,6 +13,8 @@
 
 #include "./algorithm/geomatch.h"
 
+#include <QDebug>
+
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)
@@ -22,10 +24,34 @@ MainWindow::MainWindow(QWidget *parent)
 
     w = new ImageCropper;
     ui->verticalLayout->addWidget(w);
+
+    // thread関係
+    thread = new QThread();
+    worker = new Worker();
+
+    worker->moveToThread(thread);
+    connect(worker, SIGNAL(valueChanged(QString)), ui->label, SLOT(setText(QString)));
+    connect(worker, SIGNAL(workRequested()), thread, SLOT(start()));
+    connect(thread, SIGNAL(started()), worker, SLOT(doWork()));
+    connect(worker, SIGNAL(finished()), thread, SLOT(quit()), Qt::DirectConnection);
+
+    worker->abort();
+    thread->wait(); // If the thread is not running, this will immediately return.
+
+    worker->requestWork();
+
+
 }
 
 MainWindow::~MainWindow()
 {
+    // thread 関係
+    worker->abort();
+    thread->wait();
+    qDebug()<<"Deleting thread and worker in Thread "<<this->QObject::thread()->currentThreadId();
+    delete thread;
+    delete worker;
+
     delete ui;
 }
 
