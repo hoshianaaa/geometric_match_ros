@@ -156,19 +156,19 @@ Mat pyrdown(int n, Mat img)
 
 int func(Mat template_img, Mat search_img, int temp_canny_low, int temp_canny_high, int search_canny_low, int search_canny_high) 
 {
-    Mat origin = template_img;
-    Mat simg = search_img;
+    Mat origin = template_img.clone();
+    Mat simg = search_img.clone();
+
+    if (origin.empty() || simg.empty())
+        return 1;
+
+    imshow("origin temp", origin);
+    imshow("origin search", simg);
 
     std::chrono::system_clock::time_point start, end;
     Mat frame;
 
     cv::Canny(origin, frame, temp_canny_low, temp_canny_high);
-
-    if (frame.empty())
-    {
-        cout << "Error loading image file" << endl;
-        return -1;  
-    }   
 
     int x_sum = 0;
     int y_sum = 0;
