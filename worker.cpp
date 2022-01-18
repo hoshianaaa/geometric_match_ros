@@ -76,6 +76,7 @@ void Worker::doWork()
         func(this->template_img_, this->search_img_, 50, 100, 50, 100);
 
         emit valueChanged(QString::number(i));
+        i++;
     }
 
     // Set _working to false, meaning the process can't be aborted anymore.

@@ -298,8 +298,8 @@ int func(Mat template_img, Mat search_img, int temp_canny_low, int temp_canny_hi
     imshow("w frame", wframe);
     imshow("w frame2", wframe2);
 //    imshow("simg", simg);
-    imwrite("w_frame.png", wframe);
-    waitKey(1);
+    //imwrite("w_frame.png", wframe);
+    //waitKey(1);
     return 1;
 }
 
