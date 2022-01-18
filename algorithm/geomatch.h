@@ -162,9 +162,6 @@ int func(Mat template_img, Mat search_img, int temp_canny_low, int temp_canny_hi
     if (origin.empty() || simg.empty())
         return 1;
 
-    imshow("origin temp", origin);
-    imshow("origin search", simg);
-
     std::chrono::system_clock::time_point start, end;
     Mat frame;
 
@@ -257,9 +254,9 @@ int func(Mat template_img, Mat search_img, int temp_canny_low, int temp_canny_hi
     std::cout << "image size:" << width << ", " << height << std::endl;
     std::cout << "center:" << center_x << ", " << center_y << std::endl;
 
-    imshow("frame", frame);
-    imshow("dimage", dimg);
-    imshow("dimage", dsimg);
+    //imshow("frame", frame);
+    //imshow("dimage", dimg);
+    //imshow("dimage", dsimg);
 
     cv::Mat wframe = write_points( coordinates_from_center, noOfCordinates, simg, max_pos.x * std::pow(2, pyrdown_num), max_pos.y * std::pow(2, pyrdown_num), max_degree);
 
@@ -295,7 +292,7 @@ int func(Mat template_img, Mat search_img, int temp_canny_low, int temp_canny_hi
 
     std::cout << "time:" << elapsed << std::endl;
 
-    imshow("w frame", wframe);
+//    imshow("w frame", wframe);
     imshow("w frame2", wframe2);
 //    imshow("simg", simg);
     //imwrite("w_frame.png", wframe);
