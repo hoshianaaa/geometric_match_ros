@@ -64,7 +64,9 @@ void MainWindow::callbackImage(const sensor_msgs::Image::ConstPtr& msg) {
 
     cv::cvtColor(mat, mat,CV_RGB2GRAY);
 
-    func(template_img_, mat, 50, 100, 50, 100);
+    worker->setSearchImage(mat);
+
+    //func(template_img_, mat, 50, 100, 50, 100);
     //cv::Canny(mat, mat, 50, 100);
     //cv::cvtColor(mat, mat,CV_GRAY2RGB);
 

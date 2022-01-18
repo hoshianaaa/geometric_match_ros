@@ -25,6 +25,10 @@
 #include <QObject>
 #include <QMutex>
 
+#include <opencv2/opencv.hpp>
+
+#include <iostream>
+
 class Worker : public QObject
 {
     Q_OBJECT
@@ -81,6 +85,12 @@ public slots:
      * Counting is interrupted if #_aborted is set to true.
      */
     void doWork();
+    void setTemplateImage(cv::Mat mat){
+        std::cout << "set template image" << std::endl;
+    }
+    void setSearchImage(cv::Mat mat){
+        std::cout << "set search image" << std::endl;
+    }
 };
 
 #endif // WORKER_H
