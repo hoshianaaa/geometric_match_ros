@@ -78,7 +78,7 @@ void Worker::doWork()
         cv::Mat s_img = this->search_img_;
         mutex.unlock();
         func(t_img, s_img, 50, 100, 50, 100);
-        emit valueChanged(QString::number(i));
+        //emit valueChanged(QString::number(i));
         i++;
     }
 

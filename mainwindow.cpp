@@ -28,7 +28,7 @@ MainWindow::MainWindow(QWidget *parent)
     worker = new Worker();
 
     worker->moveToThread(thread);
-    connect(worker, SIGNAL(valueChanged(QString)), ui->label, SLOT(setText(QString)));
+    //connect(worker, SIGNAL(valueChanged(QString)), ui->label, SLOT(setText(QString)));
     connect(worker, SIGNAL(workRequested()), thread, SLOT(start()));
     connect(thread, SIGNAL(started()), worker, SLOT(doWork()));
     connect(worker, SIGNAL(finished()), thread, SLOT(quit()), Qt::DirectConnection);
@@ -91,7 +91,7 @@ void MainWindow::on_cropButton_clicked()
     template_img_ = mat;
     worker->setTemplateImage(mat);
     //cv::Canny(mat, mat, 50, 100);
-    //cv::cvtColor(mat, mat,CV_GRAY2RGB);
+    cv::cvtColor(mat, mat,CV_GRAY2RGB);
 
     QImage image2(mat.data, mat.cols, mat.rows, mat.step[0], QImage::Format_RGB888);
     pixmap = QPixmap::fromImage(image2);
