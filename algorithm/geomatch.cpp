@@ -6,6 +6,8 @@
 
 #include <chrono>
 
+namespace geomatch {
+
 double deg2rad(double degree)
 {
   return degree * M_PI / 180;
@@ -294,4 +296,6 @@ int func(cv::Mat template_img, cv::Mat search_img, int temp_canny_low, int temp_
     //imwrite("w_frame.png", wframe);
     //waitKey(1);
     return 1;
+}
+
 }

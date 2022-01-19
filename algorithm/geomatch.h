@@ -7,7 +7,7 @@
 
 #include <chrono>
 
-
+namespace geomatch {
 double deg2rad(double);
 
 cv::Point2f rotate(cv::Point2f, double);
@@ -21,5 +21,5 @@ cv::Mat write_points(cv::Point2f points[], int points_num, cv::Mat img, int cent
 cv::Mat pyrdown(int, cv::Mat);
 
 int func(cv::Mat, cv::Mat, int, int, int, int);
-
+}
 #endif

@@ -131,7 +131,7 @@ void MainWindow::on_cropButton_clicked()
     }
     // エッジ取得ここまで
 
-    mat = write_points(temp_dots_from_center, temp_dot_num, mat, temp_dot_center_x, temp_dot_center_y);
+    mat = geomatch::write_points(temp_dots_from_center, temp_dot_num, mat, temp_dot_center_x, temp_dot_center_y);
 
     //cv::cvtColor(mat, mat,CV_GRAY2RGB);
 

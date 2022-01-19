@@ -77,7 +77,7 @@ void Worker::doWork()
         cv::Mat t_img = this->template_img_;
         cv::Mat s_img = this->search_img_;
         mutex.unlock();
-        func(t_img, s_img, 50, 100, 50, 100);
+        geomatch::func(t_img, s_img, 50, 100, 50, 100);
         //emit valueChanged(QString::number(i));
         i++;
     }
