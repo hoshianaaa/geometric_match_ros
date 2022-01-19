@@ -158,7 +158,7 @@ int func(cv::Mat template_img, cv::Mat search_img, int temp_canny_low, int temp_
     cv::Mat simg = search_img.clone();
 
     if (origin.empty() || simg.empty())
-        return 1;
+        return 0;
 
     std::chrono::system_clock::time_point start, end;
     cv::Mat frame;
@@ -203,7 +203,7 @@ int func(cv::Mat template_img, cv::Mat search_img, int temp_canny_low, int temp_
       coordinates_from_center[i].y = coordinates[i].y - center_y;
     }
 
-    int pyrdown_num = 4;
+    int pyrdown_num = 3;
 
     double pyrdown_center_x = center_x / std::pow(2,pyrdown_num);
     double pyrdown_center_y = center_y / std::pow(2,pyrdown_num);
@@ -291,7 +291,7 @@ int func(cv::Mat template_img, cv::Mat search_img, int temp_canny_low, int temp_
     std::cout << "time:" << elapsed << std::endl;
 
 //    imshow("w frame", wframe);
-    //cv::imshow("w frame2", wframe2);
+//    cv::imshow("w frame2", wframe2);
 //    imshow("simg", simg);
     //imwrite("w_frame.png", wframe);
     //waitKey(1);
