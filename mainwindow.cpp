@@ -13,6 +13,8 @@
 
 #include <QDebug>
 
+#include "./algorithm/geomatch.h"
+
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)
@@ -129,7 +131,9 @@ void MainWindow::on_cropButton_clicked()
     }
     // エッジ取得ここまで
 
-    cv::cvtColor(mat, mat,CV_GRAY2RGB);
+    mat = write_points(temp_dots_from_center, temp_dot_num, mat, temp_dot_center_x, temp_dot_center_y);
+
+    //cv::cvtColor(mat, mat,CV_GRAY2RGB);
 
     QImage image2(mat.data, mat.cols, mat.rows, mat.step[0], QImage::Format_RGB888);
     pixmap = QPixmap::fromImage(image2);

@@ -57,6 +57,7 @@ else()
     imagecropper/imagecropper_p.h # add
 
     algorithm/geomatch.h # add
+    algorithm/geomatch.cpp # add
 
     worker.h # add
     worker.cpp # add
