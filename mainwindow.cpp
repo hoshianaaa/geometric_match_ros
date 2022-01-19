@@ -90,7 +90,45 @@ void MainWindow::on_cropButton_clicked()
     cv::cvtColor(mat, mat,CV_RGB2GRAY);
     template_img_ = mat;
     worker->setTemplateImage(mat);
-    //cv::Canny(mat, mat, 50, 100);
+
+    cv::Mat canny_temp;
+    cv::Canny(mat, canny_temp, 50, 100);
+
+    // template imageのエッジ座標取得
+    int tempW = canny_temp.cols;
+    int tempH = canny_temp.rows;
+    int temp_dot_num = 0;
+    cv::Point2f *temp_dots;
+    temp_dots = new cv::Point2f[tempW * tempH];
+
+    int temp_dot_x_sum = 0;
+    int temp_dot_y_sum = 0;
+
+    for(int j=0;j<tempH;j++){
+        for(int i=0;i<tempW;i++){
+            if(canny_temp.at<unsigned char>(j,i) == 255){
+                temp_dots[temp_dot_num].x = i;
+                temp_dots[temp_dot_num].y = j;
+                temp_dot_x_sum += i;
+                temp_dot_y_sum += j;
+                temp_dot_num++;
+            }
+        }
+    }
+
+    double temp_dot_center_x = double(temp_dot_x_sum) / temp_dot_num;
+    double temp_dot_center_y = double(temp_dot_y_sum) / temp_dot_num;
+
+    cv::Point2f *temp_dots_from_center;
+    temp_dots_from_center = new cv::Point2f[temp_dot_num];
+
+    for(int i=0;i<temp_dot_num;i++)
+    {
+        temp_dots_from_center[i].x = temp_dots[i].x - temp_dot_center_x;
+        temp_dots_from_center[i].y = temp_dots[i].y - temp_dot_center_y;
+    }
+    // エッジ取得ここまで
+
     cv::cvtColor(mat, mat,CV_GRAY2RGB);
 
     QImage image2(mat.data, mat.cols, mat.rows, mat.step[0], QImage::Format_RGB888);
