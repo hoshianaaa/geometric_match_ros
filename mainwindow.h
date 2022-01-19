@@ -27,7 +27,6 @@ public:
 
 private slots:
     void on_pushButton_clicked();
-
     void on_cropButton_clicked();
 
 private:
@@ -38,6 +37,8 @@ private:
     ImageCropper *w;
     QPixmap pixmap;
     cv::Mat template_img_;
+    cv::Point2f *temp_dots_from_center_;
+    int temp_dot_num_;
 
     QThread *thread;
     Worker *worker;

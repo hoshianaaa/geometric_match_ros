@@ -69,7 +69,12 @@ void MainWindow::callbackImage(const sensor_msgs::Image::ConstPtr& msg) {
     //func(template_img_, mat, 50, 100, 50, 100);
     //cv::Canny(mat, mat, 50, 100);
 
-    cv::cvtColor(mat, mat,CV_GRAY2RGB);
+    if(worker->result_num_){
+        mat = geomatch::write_points(temp_dots_from_center_, temp_dot_num_, mat, worker->result_pos_.x, worker->result_pos_.y, worker->result_angle_);
+    }else{
+        cv::cvtColor(mat, mat,CV_GRAY2RGB);
+    }
+
     QImage image2(mat.data, mat.cols, mat.rows, mat.step[0], QImage::Format_RGB888);
     QPixmap pixmap2 = QPixmap::fromImage(image2);
     ui->label_2->setPixmap(pixmap2.scaled(ui->label->size(), Qt::KeepAspectRatio, Qt::SmoothTransformation));
@@ -99,7 +104,7 @@ void MainWindow::on_cropButton_clicked()
     // template imageのエッジ座標取得
     int tempW = canny_temp.cols;
     int tempH = canny_temp.rows;
-    int temp_dot_num = 0;
+    temp_dot_num_ = 0;
     cv::Point2f *temp_dots;
     temp_dots = new cv::Point2f[tempW * tempH];
 
@@ -109,29 +114,28 @@ void MainWindow::on_cropButton_clicked()
     for(int j=0;j<tempH;j++){
         for(int i=0;i<tempW;i++){
             if(canny_temp.at<unsigned char>(j,i) == 255){
-                temp_dots[temp_dot_num].x = i;
-                temp_dots[temp_dot_num].y = j;
+                temp_dots[temp_dot_num_].x = i;
+                temp_dots[temp_dot_num_].y = j;
                 temp_dot_x_sum += i;
                 temp_dot_y_sum += j;
-                temp_dot_num++;
+                temp_dot_num_++;
             }
         }
     }
 
-    double temp_dot_center_x = double(temp_dot_x_sum) / temp_dot_num;
-    double temp_dot_center_y = double(temp_dot_y_sum) / temp_dot_num;
+    double temp_dot_center_x = double(temp_dot_x_sum) / temp_dot_num_;
+    double temp_dot_center_y = double(temp_dot_y_sum) / temp_dot_num_;
 
-    cv::Point2f *temp_dots_from_center;
-    temp_dots_from_center = new cv::Point2f[temp_dot_num];
+    temp_dots_from_center_ = new cv::Point2f[temp_dot_num_];
 
-    for(int i=0;i<temp_dot_num;i++)
+    for(int i=0;i<temp_dot_num_;i++)
     {
-        temp_dots_from_center[i].x = temp_dots[i].x - temp_dot_center_x;
-        temp_dots_from_center[i].y = temp_dots[i].y - temp_dot_center_y;
+        temp_dots_from_center_[i].x = temp_dots[i].x - temp_dot_center_x;
+        temp_dots_from_center_[i].y = temp_dots[i].y - temp_dot_center_y;
     }
     // エッジ取得ここまで
 
-    mat = geomatch::write_points(temp_dots_from_center, temp_dot_num, mat, temp_dot_center_x, temp_dot_center_y);
+    mat = geomatch::write_points(temp_dots_from_center_, temp_dot_num_, mat, temp_dot_center_x, temp_dot_center_y);
 
     //cv::cvtColor(mat, mat,CV_GRAY2RGB);
 

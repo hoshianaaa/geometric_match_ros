@@ -295,6 +295,8 @@ int func(cv::Mat template_img, cv::Mat search_img, int temp_canny_low, int temp_
 //    imshow("simg", simg);
     //imwrite("w_frame.png", wframe);
     //waitKey(1);
+    result_pos = max_pos;
+    result_angle = max_degree;
     return 1;
 }
 

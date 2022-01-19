@@ -48,6 +48,10 @@ public:
      */
     void abort();
 
+    int result_num_;
+    cv::Point result_pos_;
+    double result_angle_;
+
 private:
     /**
      * @brief Process is aborted when @em true
