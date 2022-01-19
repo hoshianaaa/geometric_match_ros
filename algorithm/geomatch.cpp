@@ -152,7 +152,7 @@ cv::Mat pyrdown(int n, cv::Mat img)
   return imgs[n];
 }
 
-int func(cv::Mat template_img, cv::Mat search_img, int temp_canny_low, int temp_canny_high, int search_canny_low, int search_canny_high)
+int func(cv::Mat template_img, cv::Mat search_img, int temp_canny_low, int temp_canny_high, int search_canny_low, int search_canny_high,cv::Point& result_pos, double& result_angle)
 {
     cv::Mat origin = template_img.clone();
     cv::Mat simg = search_img.clone();
