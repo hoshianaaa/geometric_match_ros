@@ -291,7 +291,7 @@ int func(cv::Mat template_img, cv::Mat search_img, int temp_canny_low, int temp_
     std::cout << "time:" << elapsed << std::endl;
 
 //    imshow("w frame", wframe);
-    cv::imshow("w frame2", wframe2);
+    //cv::imshow("w frame2", wframe2);
 //    imshow("simg", simg);
     //imwrite("w_frame.png", wframe);
     //waitKey(1);
