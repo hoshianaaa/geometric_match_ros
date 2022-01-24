@@ -37,6 +37,8 @@ Worker::Worker(QObject *parent) :
     _abort = false;
 
     result_num_ = 0;
+    picking_pos_delta_ = cv::Point(0,0);
+
 }
 
 void Worker::requestWork()

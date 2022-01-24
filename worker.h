@@ -50,6 +50,7 @@ public:
 
     int result_num_;
     cv::Point result_pos_;
+    cv::Point picking_pos_delta_;
     double result_angle_;
 
 private:
