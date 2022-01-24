@@ -71,6 +71,7 @@ void MainWindow::callbackImage(const sensor_msgs::Image::ConstPtr& msg) {
 
     if(worker->result_num_){
         mat = geomatch::write_points(temp_dots_from_center_, temp_dot_num_, mat, worker->result_pos_.x, worker->result_pos_.y, worker->result_angle_);
+        cv::drawMarker(mat, cv::Point(worker->result_pos_.x,worker->result_pos_.y), cv::Vec3b(200,0,0), cv::MARKER_CROSS);
     }else{
         cv::cvtColor(mat, mat,CV_GRAY2RGB);
     }
@@ -136,6 +137,7 @@ void MainWindow::on_cropButton_clicked()
     // エッジ取得ここまで
 
     mat = geomatch::write_points(temp_dots_from_center_, temp_dot_num_, mat, temp_dot_center_x, temp_dot_center_y);
+    cv::drawMarker(mat, cv::Point(temp_dot_center_x,temp_dot_center_y), cv::Vec3b(200,0,0), cv::MARKER_CROSS);
 
     //cv::cvtColor(mat, mat,CV_GRAY2RGB);
 
