@@ -25,6 +25,8 @@ public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
     void mousePressEvent(QMouseEvent *event); // add
+    bool have_crop_img_;
+
 
 private slots:
     void on_pushButton_clicked();
@@ -37,9 +39,12 @@ private:
     void callbackImage(const sensor_msgs::Image::ConstPtr& msg);
     ImageCropper *w;
     QPixmap pixmap;
-    cv::Mat template_img_;
+    cv::Mat template_img_, crop_image_;
     cv::Point2f *temp_dots_from_center_;
     int temp_dot_num_;
+
+    double temp_dot_center_x_;
+    double temp_dot_center_y_;
 
     QThread *thread;
     Worker *worker;

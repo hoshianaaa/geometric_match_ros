@@ -43,6 +43,8 @@ MainWindow::MainWindow(QWidget *parent)
 
     worker->requestWork();
 
+    this->have_crop_img_ = 0;
+
 
 }
 
@@ -128,21 +130,21 @@ void MainWindow::on_cropButton_clicked()
         }
     }
 
-    double temp_dot_center_x = double(temp_dot_x_sum) / temp_dot_num_;
-    double temp_dot_center_y = double(temp_dot_y_sum) / temp_dot_num_;
+    temp_dot_center_x_ = double(temp_dot_x_sum) / temp_dot_num_;
+    temp_dot_center_y_ = double(temp_dot_y_sum) / temp_dot_num_;
 
     temp_dots_from_center_ = new cv::Point2f[temp_dot_num_];
 
     for(int i=0;i<temp_dot_num_;i++)
     {
-        temp_dots_from_center_[i].x = temp_dots[i].x - temp_dot_center_x;
-        temp_dots_from_center_[i].y = temp_dots[i].y - temp_dot_center_y;
+        temp_dots_from_center_[i].x = temp_dots[i].x - temp_dot_center_x_;
+        temp_dots_from_center_[i].y = temp_dots[i].y - temp_dot_center_y_;
     }
     // エッジ取得ここまで
 
-    mat = geomatch::write_points(temp_dots_from_center_, temp_dot_num_, mat, temp_dot_center_x, temp_dot_center_y);
-    cv::drawMarker(mat, cv::Point(temp_dot_center_x,temp_dot_center_y), cv::Vec3b(150,150,150), cv::MARKER_CROSS);
-    cv::drawMarker(mat, cv::Point(temp_dot_center_x,temp_dot_center_y), cv::Vec3b(200,0,0), cv::MARKER_CROSS);
+    mat = geomatch::write_points(temp_dots_from_center_, temp_dot_num_, mat, temp_dot_center_x_, temp_dot_center_y_);
+    cv::drawMarker(mat, cv::Point(temp_dot_center_x_,temp_dot_center_y_), cv::Vec3b(150,150,150), cv::MARKER_CROSS);
+    cv::drawMarker(mat, cv::Point(temp_dot_center_x_,temp_dot_center_y_), cv::Vec3b(200,0,0), cv::MARKER_CROSS);
 
     //cv::cvtColor(mat, mat,CV_GRAY2RGB);
 
@@ -150,6 +152,9 @@ void MainWindow::on_cropButton_clicked()
     pixmap = QPixmap::fromImage(image2);
 
     ui->label->setPixmap(pixmap);
+
+    this->have_crop_img_ = 1;
+
 }
 
 void MainWindow::mousePressEvent(QMouseEvent *event)
@@ -158,5 +163,10 @@ void MainWindow::mousePressEvent(QMouseEvent *event)
         // 参考: https://www.qtcentre.org/threads/3073-How-to-get-mouse-s-position
         QPoint p = ui->label->mapFromGlobal(QCursor::pos());
         qDebug() << "press:" << p;
+
+        if(this->have_crop_img_)
+        {
+
+        }
 
 }
