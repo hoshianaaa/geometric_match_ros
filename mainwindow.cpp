@@ -60,7 +60,8 @@ MainWindow::MainWindow(QWidget *parent)
 
     if(checkFileExistence(this->file_path_))
     {
-
+        cv::Mat im = cv::imread(this->file_path_);
+        this->set_template_image(im);
     }
 }
 
@@ -125,6 +126,7 @@ void MainWindow::on_cropButton_clicked()
     cv::Mat mat = cv::Mat(image.height(), image.width(), CV_8UC3, (void*)image.constBits(), image.bytesPerLine());
 
     this->set_template_image(mat);
+    cv::imwrite(this->file_path_, mat);
 }
 
 void MainWindow::set_template_image(cv::Mat mat)
