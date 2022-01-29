@@ -18,6 +18,16 @@
 #include <QMouseEvent> // add
 #include <QtCore/QDebug> // add
 
+#include<string>
+#include<fstream>
+#include<iostream>
+
+bool checkFileExistence(const std::string& str)
+{
+    std::ifstream ifs(str);
+    return ifs.is_open();
+}
+
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)
@@ -45,7 +55,12 @@ MainWindow::MainWindow(QWidget *parent)
 
     this->have_crop_img_ = 0;
 
+    this->file_path_ = "/tmp/template.png";
 
+    if(checkFileExistence(this->file_path_))
+    {
+
+    }
 }
 
 MainWindow::~MainWindow()
@@ -194,5 +209,4 @@ void MainWindow::mousePressEvent(QMouseEvent *event)
             ui->label->setPixmap(pixmap);
 
         }
-
 }
