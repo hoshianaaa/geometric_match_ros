@@ -26,7 +26,8 @@ public:
     ~MainWindow();
     void mousePressEvent(QMouseEvent *event); // add
     bool have_crop_img_;
-
+    std::string file_path_;
+    void set_template_image(cv::Mat mat);
 
 private slots:
     void on_pushButton_clicked();

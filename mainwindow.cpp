@@ -22,6 +22,7 @@
 #include<fstream>
 #include<iostream>
 
+// ファイル存在確認: https://qiita.com/takahiro_itazuri/items/e999ae24ab34b2756b04
 bool checkFileExistence(const std::string& str)
 {
     std::ifstream ifs(str);
@@ -122,6 +123,12 @@ void MainWindow::on_cropButton_clicked()
 
     // qimage to cv::mat (参考) https://www.codetd.com/ja/article/6620060
     cv::Mat mat = cv::Mat(image.height(), image.width(), CV_8UC3, (void*)image.constBits(), image.bytesPerLine());
+
+    this->set_template_image(mat);
+}
+
+void MainWindow::set_template_image(cv::Mat mat)
+{
 
     cv::cvtColor(mat, mat,CV_RGB2GRAY);
     template_img_ = mat;
