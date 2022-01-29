@@ -148,6 +148,8 @@ void MainWindow::on_cropButton_clicked()
     worker->picking_pos_delta_.x = 0;
     worker->picking_pos_delta_.y = 0;
 
+    this->crop_image_ = mat.clone();
+
     cv::drawMarker(mat, cv::Point(temp_dot_center_x_,temp_dot_center_y_), cv::Vec3b(200,0,0), cv::MARKER_CROSS);
 
     //cv::cvtColor(mat, mat,CV_GRAY2RGB);
@@ -172,6 +174,18 @@ void MainWindow::mousePressEvent(QMouseEvent *event)
         {
             worker->picking_pos_delta_.x = p.x() - temp_dot_center_x_;
             worker->picking_pos_delta_.y = p.y() - temp_dot_center_y_;
+
+            cv::Mat mat = this->crop_image_.clone();
+
+            cv::drawMarker(mat, cv::Point(temp_dot_center_x_ + worker->picking_pos_delta_.x,temp_dot_center_y_ + worker->picking_pos_delta_.y), cv::Vec3b(200,0,0), cv::MARKER_CROSS);
+
+            //cv::cvtColor(mat, mat,CV_GRAY2RGB);
+
+            QImage image2(mat.data, mat.cols, mat.rows, mat.step[0], QImage::Format_RGB888);
+            pixmap = QPixmap::fromImage(image2);
+
+            ui->label->setPixmap(pixmap);
+
         }
 
 }
