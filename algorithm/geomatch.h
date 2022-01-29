@@ -13,6 +13,7 @@ double deg2rad(double);
 cv::Point2f rotate(cv::Point2f, double);
 
 void geomatch_from_center(cv::Point2f, int, cv::Mat, cv::Point&, double& );
+void geomatch_from_center(cv::Point, int, cv::Mat, cv::Point&, double& );
 
 void geomatch(cv::Point2f, int, cv::Mat, cv::Point&, double&, double, int, int, int, int, int, int);
 

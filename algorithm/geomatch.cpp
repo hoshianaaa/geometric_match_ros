@@ -21,6 +21,14 @@ cv::Point2f rotate(cv::Point2f p, double th)
   return rp;
 }
 
+cv::Point rotate(cv::Point p, double th)
+{
+  cv::Point rp;
+  rp.x = std::cos(th) * p.x - std::sin(th) * p.y;
+  rp.y = std::sin(th) * p.x + std::cos(th) * p.y;
+  return rp;
+}
+
 void geomatch_from_center(cv::Point2f temp_points[],int temp_points_num, cv::Mat search_img,cv::Point& result_pos, double& result_angle)
 {
 return; 
