@@ -144,6 +144,10 @@ void MainWindow::on_cropButton_clicked()
 
     mat = geomatch::write_points(temp_dots_from_center_, temp_dot_num_, mat, temp_dot_center_x_, temp_dot_center_y_);
     cv::drawMarker(mat, cv::Point(temp_dot_center_x_,temp_dot_center_y_), cv::Vec3b(150,150,150), cv::MARKER_CROSS);
+
+    worker->picking_pos_delta_.x = 0;
+    worker->picking_pos_delta_.y = 0;
+
     cv::drawMarker(mat, cv::Point(temp_dot_center_x_,temp_dot_center_y_), cv::Vec3b(200,0,0), cv::MARKER_CROSS);
 
     //cv::cvtColor(mat, mat,CV_GRAY2RGB);
@@ -166,7 +170,8 @@ void MainWindow::mousePressEvent(QMouseEvent *event)
 
         if(this->have_crop_img_)
         {
-
+            worker->picking_pos_delta_.x = p.x() - temp_dot_center_x_;
+            worker->picking_pos_delta_.y = p.y() - temp_dot_center_y_;
         }
 
 }
