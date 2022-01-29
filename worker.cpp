@@ -85,6 +85,8 @@ void Worker::doWork()
         cv::Point ret_p;
         double ret_ang;
         if(geomatch::func(t_img, s_img, 50, 100, 50, 100, ret_p, ret_ang)){
+
+            std::cout << "result angle1: " << ret_ang << std::endl;
             result_num_ = 1;
             result_pos_ = ret_p;
             result_angle_ = ret_ang;

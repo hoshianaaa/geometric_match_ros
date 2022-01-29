@@ -78,9 +78,11 @@ void MainWindow::callbackImage(const sensor_msgs::Image::ConstPtr& msg) {
         mat = geomatch::write_points(temp_dots_from_center_, temp_dot_num_, mat, worker->result_pos_.x, worker->result_pos_.y, worker->result_angle_);
         cv::drawMarker(mat, cv::Point(worker->result_pos_.x,worker->result_pos_.y), cv::Vec3b(150,150,150), cv::MARKER_CROSS);
 
+        std::cout << "result angle:" << worker->result_angle_ << std::endl;
+
         cv::Point rotate_delta = geomatch::rotate(worker->picking_pos_delta_, geomatch::deg2rad(worker->result_angle_));
 
-        cv::drawMarker(mat, cv::Point(worker->result_pos_.x + worker->picking_pos_delta_.x,worker->result_pos_.y + worker->picking_pos_delta_.y), cv::Vec3b(200,0,0), cv::MARKER_CROSS);
+        cv::drawMarker(mat, cv::Point(worker->result_pos_.x + rotate_delta.x, worker->result_pos_.y + rotate_delta.y), cv::Vec3b(200,0,0), cv::MARKER_CROSS);
 
         //cv::drawMarker(mat, cv::Point(worker->result_pos_.x,worker->result_pos_.y), cv::Vec3b(200,0,0), cv::MARKER_CROSS);
     }else{
