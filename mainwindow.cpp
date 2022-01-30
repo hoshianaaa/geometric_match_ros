@@ -106,7 +106,11 @@ void MainWindow::callbackImage(const sensor_msgs::Image::ConstPtr& msg) {
 
         //cv::drawMarker(mat, cv::Point(worker->result_pos_.x,worker->result_pos_.y), cv::Vec3b(200,0,0), cv::MARKER_CROSS);
 
-
+        geometry_msgs::Pose2D msg;
+        msg.x = worker->result_pos_.x + rotate_delta.x;
+        msg.y = worker->result_pos_.y + rotate_delta.y;
+        msg.theta = worker->result_angle_;
+        this->result_pub_.publish(msg);
 
     }else{
         cv::cvtColor(mat, mat,CV_GRAY2RGB);
