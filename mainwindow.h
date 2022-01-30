@@ -5,6 +5,7 @@
 
 #include <ros/ros.h>
 #include <sensor_msgs/Image.h>
+#include <geometry_msgs/Pose2D.h>
 
 #include "./imagecropper/imagecropper.h"
 
@@ -37,6 +38,7 @@ private:
     Ui::MainWindow *ui;
     ros::NodeHandle nh_;
     ros::Subscriber string_sub_;
+    ros::Publisher result_pub_;
     void callbackImage(const sensor_msgs::Image::ConstPtr& msg);
     ImageCropper *w;
     QPixmap pixmap;

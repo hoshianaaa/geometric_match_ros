@@ -35,6 +35,7 @@ include_directories(
  ${cv_bridge_INCLUDE_DIRS}
  ${OpenCV_INCLUDE_DIRS}
  ${sensor_msgs_INCLUDE_DIRS}
+ ${geometry_msgs_INCLUDE_DIRS}
 )
 
 if(ANDROID)
@@ -64,4 +65,4 @@ else()
   )
 endif()
 
-target_link_libraries(geometric_match_ros PRIVATE Qt5::Widgets ${roscpp_LIBRARIES} ${cv_bridge_LIBRARIES} ${OpenCV_LIBRARIES} ${sensor_msgs_LIBRARIES})
+target_link_libraries(geometric_match_ros PRIVATE Qt5::Widgets ${roscpp_LIBRARIES} ${cv_bridge_LIBRARIES} ${OpenCV_LIBRARIES} ${sensor_msgs_LIBRARIES} ${geometry_msgs_LIBRARIES})

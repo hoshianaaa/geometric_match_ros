@@ -3,6 +3,8 @@
 
 #include <ros/ros.h>
 #include <sensor_msgs/Image.h>
+#include <geometry_msgs/Pose2D.h>
+
 #include <cv_bridge/cv_bridge.h>
 #include <opencv2/opencv.hpp>
 
@@ -35,6 +37,7 @@ MainWindow::MainWindow(QWidget *parent)
 {
     ui->setupUi(this);
     string_sub_ = nh_.subscribe("image", 10, &MainWindow::callbackImage, this);
+    result_pub_ = nh_.advertise<geometry_msgs::Pose2D>("result", 1);
 
     w = new ImageCropper;
     ui->verticalLayout->addWidget(w);
@@ -102,6 +105,9 @@ void MainWindow::callbackImage(const sensor_msgs::Image::ConstPtr& msg) {
         cv::drawMarker(mat, cv::Point(worker->result_pos_.x + rotate_delta.x, worker->result_pos_.y + rotate_delta.y), cv::Vec3b(200,0,0), cv::MARKER_CROSS);
 
         //cv::drawMarker(mat, cv::Point(worker->result_pos_.x,worker->result_pos_.y), cv::Vec3b(200,0,0), cv::MARKER_CROSS);
+
+
+
     }else{
         cv::cvtColor(mat, mat,CV_GRAY2RGB);
     }
