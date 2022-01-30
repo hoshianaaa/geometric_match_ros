@@ -118,7 +118,9 @@ void MainWindow::callbackImage(const sensor_msgs::Image::ConstPtr& msg) {
 
     QImage image2(mat.data, mat.cols, mat.rows, mat.step[0], QImage::Format_RGB888);
     QPixmap pixmap2 = QPixmap::fromImage(image2);
-    ui->label_2->setPixmap(pixmap2.scaled(ui->label->size(), Qt::KeepAspectRatio, Qt::SmoothTransformation));
+    //ui->label_2->setPixmap(pixmap2.scaled(ui->label->size(), Qt::KeepAspectRatio, Qt::SmoothTransformation));
+    ui->label_2->setPixmap(pixmap2.scaled(400, 300, Qt::KeepAspectRatio, Qt::SmoothTransformation));
+
 }
 
 
