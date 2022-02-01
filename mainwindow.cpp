@@ -143,7 +143,7 @@ void MainWindow::on_cropButton_clicked()
     cv::imwrite(this->file_path_, mat);
 }
 
-void MainWindow::set_template_image(cv::Mat mat)
+void MainWindow::set_template_image(cv::Mat mat, int canny_low, int canny_high)
 {
 
     cv::cvtColor(mat, mat,CV_RGB2GRAY);
@@ -151,7 +151,7 @@ void MainWindow::set_template_image(cv::Mat mat)
     worker->setTemplateImage(mat);
 
     cv::Mat canny_temp;
-    cv::Canny(mat, canny_temp, 50, 100);
+    cv::Canny(mat, canny_temp, canny_low, canny_high);
 
     // template imageのエッジ座標取得
     int tempW = canny_temp.cols;
