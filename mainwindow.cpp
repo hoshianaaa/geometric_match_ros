@@ -63,11 +63,17 @@ MainWindow::MainWindow(QWidget *parent)
 
     this->file_path_ = "/tmp/template.png";
 
+    temp_canny_low_ = 50;
+    temp_canny_high_ = 100;
+    search_canny_low_ = 50;
+    search_canny_high_ = 100;
+
     if(checkFileExistence(this->file_path_))
     {
         cv::Mat im = cv::imread(this->file_path_);
-        this->set_template_image(im);
+        this->set_template_image(im, this->temp_canny_low_, this->temp_canny_high_);
     }
+
 }
 
 MainWindow::~MainWindow()
@@ -139,15 +145,15 @@ void MainWindow::on_cropButton_clicked()
     // qimage to cv::mat (参考) https://www.codetd.com/ja/article/6620060
     cv::Mat mat = cv::Mat(image.height(), image.width(), CV_8UC3, (void*)image.constBits(), image.bytesPerLine());
 
-    this->set_template_image(mat);
+    this->set_template_image(mat, this->temp_canny_low_, this->temp_canny_high_);
     cv::imwrite(this->file_path_, mat);
 }
 
 void MainWindow::set_template_image(cv::Mat mat, int canny_low, int canny_high)
 {
 
-    cv::cvtColor(mat, mat,CV_RGB2GRAY);
     template_img_ = mat;
+    cv::cvtColor(mat, mat,CV_RGB2GRAY);
     worker->setTemplateImage(mat, canny_low, canny_high);
 
     cv::Mat canny_temp;
@@ -236,12 +242,14 @@ void MainWindow::mousePressEvent(QMouseEvent *event)
 
 void MainWindow::on_horizontalSlider_valueChanged(int value)
 {
-
+    this->temp_canny_low_ = value;
+    this->set_template_image(this->template_img_, this->temp_canny_low_, this->temp_canny_high_);
 }
 
 void MainWindow::on_horizontalSlider_2_valueChanged(int value)
 {
-
+    this->temp_canny_high_ = value;
+    this->set_template_image(this->template_img_, this->temp_canny_low_, this->temp_canny_high_);
 }
 
 void MainWindow::on_horizontalSlider_3_valueChanged(int value)
