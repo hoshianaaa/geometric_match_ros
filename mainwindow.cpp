@@ -233,3 +233,23 @@ void MainWindow::mousePressEvent(QMouseEvent *event)
 
         }
 }
+
+void MainWindow::on_horizontalSlider_valueChanged(int value)
+{
+
+}
+
+void MainWindow::on_horizontalSlider_2_valueChanged(int value)
+{
+
+}
+
+void MainWindow::on_horizontalSlider_3_valueChanged(int value)
+{
+
+}
+
+void MainWindow::on_horizontalSlider_4_valueChanged(int value)
+{
+
+}
