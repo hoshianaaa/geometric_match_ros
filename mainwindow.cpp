@@ -148,7 +148,7 @@ void MainWindow::set_template_image(cv::Mat mat, int canny_low, int canny_high)
 
     cv::cvtColor(mat, mat,CV_RGB2GRAY);
     template_img_ = mat;
-    worker->setTemplateImage(mat);
+    worker->setTemplateImage(mat, canny_low, canny_high);
 
     cv::Mat canny_temp;
     cv::Canny(mat, canny_temp, canny_low, canny_high);

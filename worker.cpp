@@ -80,11 +80,13 @@ void Worker::doWork()
         mutex.lock();
         cv::Mat t_img = this->template_img_;
         cv::Mat s_img = this->search_img_;
+        int temp_canny_low = this->temp_canny_low_;
+        int temp_canny_high = this->temp_canny_high_;
         mutex.unlock();
 
         cv::Point ret_p;
         double ret_ang;
-        if(geomatch::func(t_img, s_img, 50, 100, 50, 100, ret_p, ret_ang)){
+        if(geomatch::func(t_img, s_img, temp_canny_low, temp_canny_high, 50, 100, ret_p, ret_ang)){
 
             std::cout << "result angle1: " << ret_ang << std::endl;
             result_num_ = 1;

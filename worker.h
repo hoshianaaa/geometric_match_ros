@@ -69,6 +69,8 @@ private:
 
     cv::Mat template_img_, search_img_;
 
+    int temp_canny_low_, temp_canny_high_;
+
 signals:
     /**
      * @brief This signal is emitted when the Worker request to Work
@@ -92,9 +94,11 @@ public slots:
      * Counting is interrupted if #_aborted is set to true.
      */
     void doWork();
-    void setTemplateImage(cv::Mat mat){
+    void setTemplateImage(cv::Mat mat, int canny_low, int canny_high){
         std::cout << "set template image" << std::endl;
         template_img_ = mat;
+        temp_canny_low_ = canny_low;
+        temp_canny_high_ = canny_high;
     }
     void setSearchImage(cv::Mat mat){
         std::cout << "set search image" << std::endl;
