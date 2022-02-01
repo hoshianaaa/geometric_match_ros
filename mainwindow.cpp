@@ -36,7 +36,9 @@ MainWindow::MainWindow(QWidget *parent)
     , ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
-    string_sub_ = nh_.subscribe("image", 10, &MainWindow::callbackImage, this);
+    //string_sub_ = nh_.subscribe("image", 10, &MainWindow::callbackImage, this);
+    string_sub_ = nh_.subscribe("/usb_cam/image_raw", 10, &MainWindow::callbackImage, this);
+
     result_pub_ = nh_.advertise<geometry_msgs::Pose2D>("result", 1);
 
     w = new ImageCropper;
