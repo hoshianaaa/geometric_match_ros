@@ -74,6 +74,10 @@ MainWindow::MainWindow(QWidget *parent)
         this->set_template_image(im, this->temp_canny_low_, this->temp_canny_high_);
     }
 
+    ui->horizontalSlider->setValue(this->temp_canny_low_);
+    ui->horizontalSlider_2->setValue(this->temp_canny_high_);
+
+
 }
 
 MainWindow::~MainWindow()
@@ -243,13 +247,13 @@ void MainWindow::mousePressEvent(QMouseEvent *event)
 void MainWindow::on_horizontalSlider_valueChanged(int value)
 {
     this->temp_canny_low_ = value;
-    this->set_template_image(this->template_img_, this->temp_canny_low_, this->temp_canny_high_);
+    if(this->template_img_.data != NULL)this->set_template_image(this->template_img_, this->temp_canny_low_, this->temp_canny_high_);
 }
 
 void MainWindow::on_horizontalSlider_2_valueChanged(int value)
 {
     this->temp_canny_high_ = value;
-    this->set_template_image(this->template_img_, this->temp_canny_low_, this->temp_canny_high_);
+    if(this->template_img_.data != NULL)this->set_template_image(this->template_img_, this->temp_canny_low_, this->temp_canny_high_);
 }
 
 void MainWindow::on_horizontalSlider_3_valueChanged(int value)
