@@ -156,7 +156,7 @@ void MainWindow::on_cropButton_clicked()
 void MainWindow::set_template_image(cv::Mat mat, int canny_low, int canny_high)
 {
 
-    template_img_ = mat;
+    template_img_ = mat.clone();
     cv::cvtColor(mat, mat,CV_RGB2GRAY);
     worker->setTemplateImage(mat, canny_low, canny_high);
 
