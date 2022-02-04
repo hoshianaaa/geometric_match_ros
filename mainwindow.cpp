@@ -109,14 +109,14 @@ void MainWindow::callbackImage(const sensor_msgs::Image::ConstPtr& msg) {
     //cv::Canny(mat, mat, 50, 100);
 
     if(worker->result_num_){
-        mat = geomatch::write_points(temp_dots_from_center_, temp_dot_num_, mat, worker->result_pos_.x, worker->result_pos_.y, worker->result_angle_);
-        cv::drawMarker(mat, cv::Point(worker->result_pos_.x,worker->result_pos_.y), cv::Vec3b(150,150,150), cv::MARKER_CROSS);
+        show_img = geomatch::write_points(temp_dots_from_center_, temp_dot_num_, show_img, worker->result_pos_.x, worker->result_pos_.y, worker->result_angle_);
+        cv::drawMarker(show_img, cv::Point(worker->result_pos_.x,worker->result_pos_.y), cv::Vec3b(150,150,150), cv::MARKER_CROSS);
 
         std::cout << "result angle:" << worker->result_angle_ << std::endl;
 
         cv::Point rotate_delta = geomatch::rotate(worker->picking_pos_delta_, geomatch::deg2rad(worker->result_angle_));
 
-        cv::drawMarker(mat, cv::Point(worker->result_pos_.x + rotate_delta.x, worker->result_pos_.y + rotate_delta.y), cv::Vec3b(200,0,0), cv::MARKER_CROSS);
+        cv::drawMarker(show_img, cv::Point(worker->result_pos_.x + rotate_delta.x, worker->result_pos_.y + rotate_delta.y), cv::Vec3b(200,0,0), cv::MARKER_CROSS);
 
         //cv::drawMarker(mat, cv::Point(worker->result_pos_.x,worker->result_pos_.y), cv::Vec3b(200,0,0), cv::MARKER_CROSS);
 
@@ -127,10 +127,10 @@ void MainWindow::callbackImage(const sensor_msgs::Image::ConstPtr& msg) {
         this->result_pub_.publish(msg);
 
     }else{
-        cv::cvtColor(mat, mat,CV_GRAY2RGB);
+        //cv::cvtColor(mat, mat,CV_GRAY2RGB);
     }
 
-    QImage image2(mat.data, mat.cols, mat.rows, mat.step[0], QImage::Format_RGB888);
+    QImage image2(show_img.data, show_img.cols, show_img.rows, show_img.step[0], QImage::Format_RGB888);
     QPixmap pixmap2 = QPixmap::fromImage(image2);
     //ui->label_2->setPixmap(pixmap2.scaled(ui->label->size(), Qt::KeepAspectRatio, Qt::SmoothTransformation));
     ui->label_2->setPixmap(pixmap2.scaled(400, 300, Qt::KeepAspectRatio, Qt::SmoothTransformation));
