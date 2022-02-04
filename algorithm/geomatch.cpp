@@ -102,6 +102,7 @@ void geomatch(cv::Point2f temp_points[],int temp_points_num, cv::Mat search_img,
             int y = int(dot[k].y + j);
             if ((x > 0) && (y > 0) && (x < s_img.cols - 1) && ( y < s_img.rows - 1 ))
               if(s_img.at<unsigned char>(y,x) == 255)counter++;
+            if ((temp_points_num - k) <= (max_count - counter))break;
            }
            if (counter > max_count)
            {
