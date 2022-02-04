@@ -69,7 +69,7 @@ private:
 
     cv::Mat template_img_, search_img_;
 
-    int temp_canny_low_, temp_canny_high_;
+    int temp_canny_low_, temp_canny_high_, search_canny_low_, search_canny_high_;
 
 signals:
     /**

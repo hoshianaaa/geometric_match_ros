@@ -39,6 +39,9 @@ Worker::Worker(QObject *parent) :
     result_num_ = 0;
     picking_pos_delta_ = cv::Point(0,0);
 
+    this->search_canny_low_ = 50;
+    this->search_canny_high_ = 100;
+
 }
 
 void Worker::requestWork()
@@ -82,11 +85,13 @@ void Worker::doWork()
         cv::Mat s_img = this->search_img_;
         int temp_canny_low = this->temp_canny_low_;
         int temp_canny_high = this->temp_canny_high_;
+        int search_canny_low = this->search_canny_low_;
+        int search_canny_high = this->search_canny_high_;
         mutex.unlock();
 
         cv::Point ret_p;
         double ret_ang;
-        if(geomatch::func(t_img, s_img, temp_canny_low, temp_canny_high, 50, 100, ret_p, ret_ang)){
+        if(geomatch::func(t_img, s_img, temp_canny_low, temp_canny_high, search_canny_low, search_canny_high, ret_p, ret_ang)){
 
             std::cout << "result angle1: " << ret_ang << std::endl;
             result_num_ = 1;
