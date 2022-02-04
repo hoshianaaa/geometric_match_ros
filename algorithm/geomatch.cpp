@@ -216,7 +216,7 @@ int func(cv::Mat template_img, cv::Mat search_img, int temp_canny_low, int temp_
       coordinates_from_center[i].y = coordinates[i].y - center_y;
     }
 
-    int pyrdown_num = 3;
+    int pyrdown_num = 2;
 
     double pyrdown_center_x = center_x / std::pow(2,pyrdown_num);
     double pyrdown_center_y = center_y / std::pow(2,pyrdown_num);
