@@ -94,7 +94,9 @@ MainWindow::~MainWindow()
 
 void MainWindow::callbackImage(const sensor_msgs::Image::ConstPtr& msg) {
     cv_bridge::CvImageConstPtr cv_ptr = cv_bridge::toCvShare(msg, sensor_msgs::image_encodings::RGB8);
-    cv::Mat mat = cv_ptr->image;
+    cv::Mat origin = cv_ptr->image;
+    cv::Mat mat = origin.clone();
+    cv::Mat show_img = origin.clone();
 
     QImage image(mat.data, mat.cols, mat.rows, mat.step[0], QImage::Format_RGB888);
     pixmap = QPixmap::fromImage(image);
