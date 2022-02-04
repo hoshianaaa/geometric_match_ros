@@ -131,7 +131,12 @@ void geomatch(cv::Point2f temp_points[],int temp_points_num, cv::Mat search_img,
 cv::Mat write_points(cv::Point2f points[], int points_num, cv::Mat img, int center_x , int center_y  ,double degree)
 {
   cv::Mat ret;
-  cv::cvtColor(img, ret, cv::COLOR_GRAY2RGB);
+  if (img.type()==CV_8UC1){
+    cv::cvtColor(img, ret, cv::COLOR_GRAY2RGB);
+  }
+  else{
+    ret = img.clone();
+  }
 
   for (int i = 0; i < points_num; i++)
   {
