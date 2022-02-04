@@ -76,6 +76,9 @@ MainWindow::MainWindow(QWidget *parent)
 
     ui->horizontalSlider->setValue(this->temp_canny_low_);
     ui->horizontalSlider_2->setValue(this->temp_canny_high_);
+    ui->horizontalSlider_3->setValue(this->search_canny_low_);
+    ui->horizontalSlider_4->setValue(this->search_canny_high_);
+
 
 
 }
@@ -272,10 +275,10 @@ void MainWindow::on_horizontalSlider_2_valueChanged(int value)
 
 void MainWindow::on_horizontalSlider_3_valueChanged(int value)
 {
-
+    this->search_canny_low_ = value;
 }
 
 void MainWindow::on_horizontalSlider_4_valueChanged(int value)
 {
-
+    this->search_canny_high_ = value;
 }
