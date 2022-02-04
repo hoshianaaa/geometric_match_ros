@@ -196,6 +196,18 @@ int func(cv::Mat template_img, cv::Mat search_img, int temp_canny_low, int temp_
         for (int i = 0; i < frame.cols; i++)
         {
             if(src[i] == 255){
+              circle(frame, cv::Point(i, j), 10, 0, -1, cv::LINE_AA);
+              src[i] = 255;
+            }
+        }
+    }
+
+    for (int j = 0; j < frame.rows; j++)
+    {
+        unsigned char *src = frame.ptr<unsigned char>(j);
+        for (int i = 0; i < frame.cols; i++)
+        {
+            if(src[i] == 255){
               coordinates[noOfCordinates].x = i;
               coordinates[noOfCordinates].y = j;
               x_sum += i;
@@ -237,7 +249,7 @@ int func(cv::Mat template_img, cv::Mat search_img, int temp_canny_low, int temp_
         for (int i = 0; i < dimg.cols; i++)
         {
             if(src[i] == 255){
-              circle(dimg, cv::Point(i, j), 1, 0, -1, cv::LINE_AA);
+              circle(dimg, cv::Point(i, j), 2, 0, -1, cv::LINE_AA);
               src[i] = 255;
               dots[dot_num].x = (double)i - pyrdown_center_x;
               dots[dot_num].y = (double)j - pyrdown_center_y;
@@ -267,8 +279,8 @@ int func(cv::Mat template_img, cv::Mat search_img, int temp_canny_low, int temp_
     std::cout << "center:" << center_x << ", " << center_y << std::endl;
 
     //imshow("frame", frame);
-    //imshow("dimage", dimg);
-    //imshow("dimage", dsimg);
+    //cv::imshow("dimage", dimg);
+    //cv::imshow("dimage", dsimg);
 
     cv::Mat wframe = write_points( coordinates_from_center, noOfCordinates, simg, max_pos.x * std::pow(2, pyrdown_num), max_pos.y * std::pow(2, pyrdown_num), max_degree);
 
@@ -276,7 +288,7 @@ int func(cv::Mat template_img, cv::Mat search_img, int temp_canny_low, int temp_
     double up_pos_x = max_pos.x * std::pow(2, pyrdown_num);
     double up_pos_y = max_pos.y * std::pow(2, pyrdown_num);
 
-    double per = 0.1;
+    double per = 0.03;
 
     int min_x = int(up_pos_x - width * per);
     int max_x = int(up_pos_x + width * per);
@@ -308,7 +320,7 @@ int func(cv::Mat template_img, cv::Mat search_img, int temp_canny_low, int temp_
 //    cv::imshow("w frame2", wframe2);
 //    imshow("simg", simg);
     //imwrite("w_frame.png", wframe);
-    //waitKey(1);
+    //cv::waitKey(10);
     result_pos = max_pos;
     result_angle = max_degree;
     return 1;
