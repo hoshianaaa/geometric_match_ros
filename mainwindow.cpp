@@ -106,7 +106,19 @@ void MainWindow::callbackImage(const sensor_msgs::Image::ConstPtr& msg) {
     worker->setSearchImage(mat);
 
     //func(template_img_, mat, 50, 100, 50, 100);
-    //cv::Canny(mat, mat, 50, 100);
+    cv::Mat canny_img;
+    cv::Canny(mat, canny_img, 50, 100);
+
+    for (int x=0;x<mat.cols;x++)
+    {
+        for (int y=0;y<mat.rows;y++)
+        {
+            if(canny_img.at<uint8_t>(y,x)==255)
+            {
+                show_img.at<cv::Vec3b>(y,x) = cv::Vec3b(255,0,0);
+            }
+        }
+    }
 
     if(worker->result_num_){
         show_img = geomatch::write_points(temp_dots_from_center_, temp_dot_num_, show_img, worker->result_pos_.x, worker->result_pos_.y, worker->result_angle_);
