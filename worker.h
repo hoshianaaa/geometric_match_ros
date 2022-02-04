@@ -52,6 +52,8 @@ public:
     cv::Point result_pos_;
     cv::Point picking_pos_delta_;
     double result_angle_;
+    int search_canny_low_, search_canny_high_;
+
 
 private:
     /**
@@ -69,7 +71,7 @@ private:
 
     cv::Mat template_img_, search_img_;
 
-    int temp_canny_low_, temp_canny_high_, search_canny_low_, search_canny_high_;
+    int temp_canny_low_, temp_canny_high_;
 
 signals:
     /**
