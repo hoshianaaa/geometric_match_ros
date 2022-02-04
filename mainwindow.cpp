@@ -110,7 +110,7 @@ void MainWindow::callbackImage(const sensor_msgs::Image::ConstPtr& msg) {
 
     //func(template_img_, mat, 50, 100, 50, 100);
     cv::Mat canny_img;
-    cv::Canny(mat, canny_img, 50, 100);
+    cv::Canny(mat, canny_img, this->search_canny_low_, this->search_canny_high_);
 
     for (int x=0;x<mat.cols;x++)
     {
