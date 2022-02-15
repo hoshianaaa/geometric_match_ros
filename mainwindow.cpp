@@ -112,6 +112,9 @@ void MainWindow::callbackImage(const sensor_msgs::Image::ConstPtr& msg) {
     cv::Mat canny_img;
     cv::Canny(mat, canny_img, this->search_canny_low_, this->search_canny_high_);
 
+    //bouchou shori tuika (only viewer)
+    cv::dilate(canny_img, canny_img, cv::Mat::ones(3, 3, CV_8U));
+
     for (int x=0;x<mat.cols;x++)
     {
         for (int y=0;y<mat.rows;y++)
