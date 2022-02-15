@@ -196,7 +196,7 @@ int func(cv::Mat template_img, cv::Mat search_img, int temp_canny_low, int temp_
         for (int i = 0; i < frame.cols; i++)
         {
             if(src[i] == 255){
-              circle(frame, cv::Point(i, j), 10, 0, -1, cv::LINE_AA);
+              circle(frame, cv::Point(i, j), 3, 0, -1, cv::LINE_AA);
               src[i] = 255;
             }
         }
@@ -249,7 +249,7 @@ int func(cv::Mat template_img, cv::Mat search_img, int temp_canny_low, int temp_
         for (int i = 0; i < dimg.cols; i++)
         {
             if(src[i] == 255){
-              circle(dimg, cv::Point(i, j), 2, 0, -1, cv::LINE_AA);
+              circle(dimg, cv::Point(i, j), 1, 0, -1, cv::LINE_AA);
               src[i] = 255;
               dots[dot_num].x = (double)i - pyrdown_center_x;
               dots[dot_num].y = (double)j - pyrdown_center_y;
@@ -257,6 +257,7 @@ int func(cv::Mat template_img, cv::Mat search_img, int temp_canny_low, int temp_
             } 
         }
     }
+
 
     int simg_w = simg.cols;
     int simg_h = simg.rows;
