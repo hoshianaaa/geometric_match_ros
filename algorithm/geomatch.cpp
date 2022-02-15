@@ -229,7 +229,7 @@ int func(cv::Mat template_img, cv::Mat search_img, int temp_canny_low, int temp_
       coordinates_from_center[i].y = coordinates[i].y - center_y;
     }
 
-    int pyrdown_num = 2;
+    int pyrdown_num = 1;
 
     double pyrdown_center_x = center_x / std::pow(2,pyrdown_num);
     double pyrdown_center_y = center_y / std::pow(2,pyrdown_num);
@@ -262,8 +262,9 @@ int func(cv::Mat template_img, cv::Mat search_img, int temp_canny_low, int temp_
     int simg_w = simg.cols;
     int simg_h = simg.rows;
 
-   cv::Mat dsimg = pyrdown(pyrdown_num, simg);
+    cv::Mat dsimg = pyrdown(pyrdown_num, simg);
     cv::Canny(dsimg, dsimg, search_canny_low, search_canny_high);
+
     int dsimgW = dsimg.cols;
     int dsimgH = dsimg.rows;
 
@@ -304,6 +305,7 @@ int func(cv::Mat template_img, cv::Mat search_img, int temp_canny_low, int temp_
     if(max_y>simg_h)min_y = simg_h;
 
     cv::Canny(simg, simg, search_canny_low, search_canny_high);
+    cv::dilate(simg, simg, cv::Mat::ones(3, 3, CV_8U));
     //void geomatch(cv::Point2f temp_points[],int temp_points_num, cv::Mat search_img,cv::Point& result_pos, double& result_angle, double d_angle = 0.1, int angle_min = -1, int angle_max = -1, int x_min = -1, int x_max = -1, int y_min = -1, int y_max = -1)
     std::cout << min_x << "," << max_x << "," << min_y << "," << max_y << std::endl;
     std::cout << min_ang << "," << max_ang << std::endl;
