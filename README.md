@@ -1,5 +1,4 @@
 # geometric_match_ros
-## geometric_match_ros について
 
 rosイメージからテンプレートの形状を探索してその位置を出力します。
 
