@@ -2,7 +2,7 @@
 ## バイナリ提供について
 以下からダウンロードが可能です。 
   
-https://github.com/hoshianaaa/geometric_match_ros/releases/tag/2022.2.19
+https://github.com/hoshianaaa/geometric_match_ros/releases
   
 
 ## 動作環境
