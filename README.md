@@ -1,9 +1,8 @@
 # geometric_match_ros
 
-テンプレートの形状位置を探索して出力します。
+テンプレートの形状位置を探索
 
-## バイナリ提供について
-以下からダウンロードが可能です。 
+## バイナリ
   
 https://github.com/hoshianaaa/geometric_match_ros/releases
   
