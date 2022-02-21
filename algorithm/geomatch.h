@@ -21,6 +21,6 @@ cv::Mat write_points(cv::Point2f points[], int points_num, cv::Mat img, int cent
 
 cv::Mat pyrdown(int, cv::Mat);
 
-int func(cv::Mat, cv::Mat, int, int, int, int, cv::Point& result_pos, double& result_angle);
+int func(cv::Mat, cv::Mat, int, int, int, int, cv::Point& result_pos, double& result_angle, double& match_ratio);
 }
 #endif

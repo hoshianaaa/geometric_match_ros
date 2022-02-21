@@ -167,7 +167,7 @@ cv::Mat pyrdown(int n, cv::Mat img)
   return imgs[n];
 }
 
-int func(cv::Mat template_img, cv::Mat search_img, int temp_canny_low, int temp_canny_high, int search_canny_low, int search_canny_high,cv::Point& result_pos, double& result_angle)
+int func(cv::Mat template_img, cv::Mat search_img, int temp_canny_low, int temp_canny_high, int search_canny_low, int search_canny_high,cv::Point& result_pos, double& result_angle, double& match_ratio)
 {
     cv::Mat origin = template_img.clone();
     cv::Mat simg = search_img.clone();
@@ -275,7 +275,7 @@ int func(cv::Mat template_img, cv::Mat search_img, int temp_canny_low, int temp_
     double max_degree;
 
     //void geomatch(cv::Point2f temp_points[],int temp_points_num, cv::Mat search_img,cv::Point& result_pos, double& result_angle, double d_angle = 0.1, int angle_min = -1, int angle_max = -1, int x_min = -1, int x_max = -1, int y_min = -1, int y_max = -1)
-    double match_ratio;
+
     geomatch(dots, dot_num, dsimg, max_pos, max_degree , match_ratio, 2);
 
     //std::cout << "edge num:" << noOfCordinates << std::endl;
