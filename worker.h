@@ -51,7 +51,7 @@ public:
     int result_num_;
     cv::Point result_pos_;
     cv::Point picking_pos_delta_;
-    double result_angle_;
+    double result_angle_, match_ratio_;
     int search_canny_low_, search_canny_high_;
 
 

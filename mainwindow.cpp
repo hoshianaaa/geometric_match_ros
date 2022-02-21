@@ -128,7 +128,8 @@ void MainWindow::callbackImage(const sensor_msgs::Image::ConstPtr& msg) {
     worker->search_canny_low_ = this->search_canny_low_;
     worker->search_canny_high_ = this->search_canny_high_;
 
-    if(worker->result_num_){
+    if(worker->result_num_ && (worker->match_ratio_ > 0.8)){
+
         show_img = geomatch::write_points(temp_dots_from_center_, temp_dot_num_, show_img, worker->result_pos_.x, worker->result_pos_.y, worker->result_angle_);
         cv::drawMarker(show_img, cv::Point(worker->result_pos_.x,worker->result_pos_.y), cv::Vec3b(150,150,150), cv::MARKER_CROSS);
 

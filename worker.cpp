@@ -94,9 +94,13 @@ void Worker::doWork()
         if(geomatch::func(t_img, s_img, temp_canny_low, temp_canny_high, search_canny_low, search_canny_high, ret_p, ret_ang, match_ratio)){
 
             //std::cout << "result angle1: " << ret_ang << std::endl;
+            //std::cout << "match ratio: " << match_ratio << std::endl;
+
             result_num_ = 1;
             result_pos_ = ret_p;
             result_angle_ = ret_ang;
+            match_ratio_ = match_ratio;
+
         }else {
             result_num_ = 0;
         }

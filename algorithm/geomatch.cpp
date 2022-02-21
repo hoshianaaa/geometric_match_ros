@@ -119,13 +119,14 @@ void geomatch(cv::Point2f temp_points[],int temp_points_num, cv::Mat search_img,
   result_pos.x = max_pos.x;
   result_pos.y = max_pos.y;
   result_angle = max_degree;
+  match_ratio = (double)max_count / temp_points_num;
 
   std::cout << "*** max pos ***" << std::endl;
   std::cout << "x:" << max_pos.x << std::endl;
   std::cout << "y:" << max_pos.y << std::endl;
   std::cout << "deg:" << max_degree << std::endl;
   std::cout << "count:" << max_count << std::endl;
-  std::cout << "match ratio:" << (double)max_count / temp_points_num << std::endl;
+  std::cout << "match ratio:" << match_ratio << std::endl;
 
   return;
 }
