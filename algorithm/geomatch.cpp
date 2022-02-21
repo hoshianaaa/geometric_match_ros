@@ -34,7 +34,7 @@ void geomatch_from_center(cv::Point2f temp_points[],int temp_points_num, cv::Mat
 return; 
 }
 
-void geomatch(cv::Point2f temp_points[],int temp_points_num, cv::Mat search_img,cv::Point& result_pos, double& result_angle, double d_angle = 0.1, int angle_min = -1, int angle_max = -1, int x_min = -1, int x_max = -1, int y_min = -1, int y_max = -1)
+void geomatch(cv::Point2f temp_points[],int temp_points_num, cv::Mat search_img,cv::Point& result_pos, double& result_angle, double& match_ratio, double d_angle = 0.1, int angle_min = -1, int angle_max = -1, int x_min = -1, int x_max = -1, int y_min = -1, int y_max = -1)
 {
 
   cv::Mat s_img = search_img;
@@ -275,7 +275,8 @@ int func(cv::Mat template_img, cv::Mat search_img, int temp_canny_low, int temp_
     double max_degree;
 
     //void geomatch(cv::Point2f temp_points[],int temp_points_num, cv::Mat search_img,cv::Point& result_pos, double& result_angle, double d_angle = 0.1, int angle_min = -1, int angle_max = -1, int x_min = -1, int x_max = -1, int y_min = -1, int y_max = -1)
-    geomatch(dots, dot_num, dsimg, max_pos, max_degree ,2);
+    double match_ratio;
+    geomatch(dots, dot_num, dsimg, max_pos, max_degree , match_ratio, 2);
 
     //std::cout << "edge num:" << noOfCordinates << std::endl;
     //std::cout << "image size:" << width << ", " << height << std::endl;
@@ -311,7 +312,7 @@ int func(cv::Mat template_img, cv::Mat search_img, int temp_canny_low, int temp_
     //std::cout << min_x << "," << max_x << "," << min_y << "," << max_y << std::endl;
     //std::cout << min_ang << "," << max_ang << std::endl;
 
-    geomatch(coordinates_from_center, noOfCordinates, simg, max_pos, max_degree , 2, min_ang, max_ang, min_x, max_x, min_y, max_y);
+    geomatch(coordinates_from_center, noOfCordinates, simg, max_pos, max_degree , match_ratio, 2, min_ang, max_ang, min_x, max_x, min_y, max_y);
     //geomatch(coordinates_from_center, noOfCordinates, simg, max_pos, max_degree , 2, 359, 360);
     cv::Mat wframe2 = write_points( coordinates_from_center, noOfCordinates, simg, max_pos.x, max_pos.y, max_degree);
 
