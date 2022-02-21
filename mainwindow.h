@@ -42,6 +42,8 @@ private slots:
 
     void on_horizontalSlider_4_valueChanged(int value);
 
+    void on_horizontalSlider_5_valueChanged(int value);
+
 private:
     Ui::MainWindow *ui;
     ros::NodeHandle nh_;
@@ -61,6 +63,8 @@ private:
 
     double temp_dot_center_x_;
     double temp_dot_center_y_;
+
+    double match_ratio_th_;
 
     QThread *thread;
     Worker *worker;

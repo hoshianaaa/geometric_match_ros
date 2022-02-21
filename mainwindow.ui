@@ -172,6 +172,19 @@
       </property>
      </widget>
     </item>
+    <item>
+     <widget class="QSlider" name="horizontalSlider_5">
+      <property name="maximum">
+       <number>100</number>
+      </property>
+      <property name="value">
+       <number>80</number>
+      </property>
+      <property name="orientation">
+       <enum>Qt::Horizontal</enum>
+      </property>
+     </widget>
+    </item>
    </layout>
   </widget>
   <widget class="QMenuBar" name="menubar">

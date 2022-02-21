@@ -67,6 +67,7 @@ MainWindow::MainWindow(QWidget *parent)
     temp_canny_high_ = 100;
     search_canny_low_ = 50;
     search_canny_high_ = 100;
+    match_ratio_th_ = 0.8;
 
     if(checkFileExistence(this->file_path_))
     {
@@ -78,8 +79,7 @@ MainWindow::MainWindow(QWidget *parent)
     ui->horizontalSlider_2->setValue(this->temp_canny_high_);
     ui->horizontalSlider_3->setValue(this->search_canny_low_);
     ui->horizontalSlider_4->setValue(this->search_canny_high_);
-
-
+    ui->horizontalSlider_5->setValue(this->match_ratio_th_ * 100);
 
 }
 
@@ -128,7 +128,9 @@ void MainWindow::callbackImage(const sensor_msgs::Image::ConstPtr& msg) {
     worker->search_canny_low_ = this->search_canny_low_;
     worker->search_canny_high_ = this->search_canny_high_;
 
-    if(worker->result_num_ && (worker->match_ratio_ > 0.8)){
+    std::cout << "match ratio th:" << this->match_ratio_th_ << std::endl;
+
+    if(worker->result_num_ && (worker->match_ratio_ > this->match_ratio_th_)){
 
         show_img = geomatch::write_points(temp_dots_from_center_, temp_dot_num_, show_img, worker->result_pos_.x, worker->result_pos_.y, worker->result_angle_);
         cv::drawMarker(show_img, cv::Point(worker->result_pos_.x,worker->result_pos_.y), cv::Vec3b(150,150,150), cv::MARKER_CROSS);
@@ -287,4 +289,9 @@ void MainWindow::on_horizontalSlider_3_valueChanged(int value)
 void MainWindow::on_horizontalSlider_4_valueChanged(int value)
 {
     this->search_canny_high_ = value;
+}
+
+void MainWindow::on_horizontalSlider_5_valueChanged(int value)
+{
+    this->match_ratio_th_ = (double)value/100;
 }
