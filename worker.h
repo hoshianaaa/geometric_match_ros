@@ -97,13 +97,13 @@ public slots:
      */
     void doWork();
     void setTemplateImage(cv::Mat mat, int canny_low, int canny_high){
-        std::cout << "set template image" << std::endl;
+        //std::cout << "set template image" << std::endl;
         template_img_ = mat;
         temp_canny_low_ = canny_low;
         temp_canny_high_ = canny_high;
     }
     void setSearchImage(cv::Mat mat){
-        std::cout << "set search image" << std::endl;
+        //std::cout << "set search image" << std::endl;
         search_img_ = mat;
     }
 };

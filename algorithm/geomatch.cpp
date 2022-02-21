@@ -53,18 +53,18 @@ void geomatch(cv::Point2f temp_points[],int temp_points_num, cv::Mat search_img,
   int x_region_max = s_img.cols;
   int y_region_max = s_img.rows;
 
-  std::cout << "*** search image size ***" << std::endl;
-  std::cout << "w:" << x_region_max << std::endl;
-  std::cout << "h:" << y_region_max << std::endl;
+  //std::cout << "*** search image size ***" << std::endl;
+  //std::cout << "w:" << x_region_max << std::endl;
+  //std::cout << "h:" << y_region_max << std::endl;
 
   if (x_min != -1)x_region_min = x_min;
   if (y_min != -1)y_region_min = y_min;
   if (x_max != -1)x_region_max = x_max;
   if (y_max != -1)y_region_max = y_max;
 
-  std::cout << "*** region ***" << std::endl;
-  std::cout << "x:" << x_min << " - " << x_max << std::endl;
-  std::cout << "y:" << y_min << " - " << y_max << std::endl;
+  //std::cout << "*** region ***" << std::endl;
+  //std::cout << "x:" << x_min << " - " << x_max << std::endl;
+  //std::cout << "y:" << y_min << " - " << y_max << std::endl;
 
   int max_count = 0;
   cv::Point max_pos;
@@ -125,6 +125,7 @@ void geomatch(cv::Point2f temp_points[],int temp_points_num, cv::Mat search_img,
   std::cout << "y:" << max_pos.y << std::endl;
   std::cout << "deg:" << max_degree << std::endl;
   std::cout << "count:" << max_count << std::endl;
+  std::cout << "match ratio:" << max_count / temp_points_num << std::endl;
 
   return;
 }
@@ -268,7 +269,7 @@ int func(cv::Mat template_img, cv::Mat search_img, int temp_canny_low, int temp_
     int dsimgW = dsimg.cols;
     int dsimgH = dsimg.rows;
 
-    std::cout << "dots num:" << dot_num << std::endl;
+    //std::cout << "dots num:" << dot_num << std::endl;
 
     cv::Point max_pos;
     double max_degree;
@@ -276,9 +277,9 @@ int func(cv::Mat template_img, cv::Mat search_img, int temp_canny_low, int temp_
     //void geomatch(cv::Point2f temp_points[],int temp_points_num, cv::Mat search_img,cv::Point& result_pos, double& result_angle, double d_angle = 0.1, int angle_min = -1, int angle_max = -1, int x_min = -1, int x_max = -1, int y_min = -1, int y_max = -1)
     geomatch(dots, dot_num, dsimg, max_pos, max_degree ,2);
 
-    std::cout << "edge num:" << noOfCordinates << std::endl;
-    std::cout << "image size:" << width << ", " << height << std::endl;
-    std::cout << "center:" << center_x << ", " << center_y << std::endl;
+    //std::cout << "edge num:" << noOfCordinates << std::endl;
+    //std::cout << "image size:" << width << ", " << height << std::endl;
+    //std::cout << "center:" << center_x << ", " << center_y << std::endl;
 
     //imshow("frame", frame);
     //cv::imshow("dimage", dimg);
@@ -307,8 +308,8 @@ int func(cv::Mat template_img, cv::Mat search_img, int temp_canny_low, int temp_
     cv::Canny(simg, simg, search_canny_low, search_canny_high);
     cv::dilate(simg, simg, cv::Mat::ones(3, 3, CV_8U));
     //void geomatch(cv::Point2f temp_points[],int temp_points_num, cv::Mat search_img,cv::Point& result_pos, double& result_angle, double d_angle = 0.1, int angle_min = -1, int angle_max = -1, int x_min = -1, int x_max = -1, int y_min = -1, int y_max = -1)
-    std::cout << min_x << "," << max_x << "," << min_y << "," << max_y << std::endl;
-    std::cout << min_ang << "," << max_ang << std::endl;
+    //std::cout << min_x << "," << max_x << "," << min_y << "," << max_y << std::endl;
+    //std::cout << min_ang << "," << max_ang << std::endl;
 
     geomatch(coordinates_from_center, noOfCordinates, simg, max_pos, max_degree , 2, min_ang, max_ang, min_x, max_x, min_y, max_y);
     //geomatch(coordinates_from_center, noOfCordinates, simg, max_pos, max_degree , 2, 359, 360);
@@ -317,7 +318,7 @@ int func(cv::Mat template_img, cv::Mat search_img, int temp_canny_low, int temp_
     end = std::chrono::system_clock::now();
     double elapsed = std::chrono::duration_cast<std::chrono::milliseconds>(end-start).count();
 
-    std::cout << "time:" << elapsed << std::endl;
+    //std::cout << "time:" << elapsed << std::endl;
 
 //    imshow("w frame", wframe);
 //    cv::imshow("w frame2", wframe2);

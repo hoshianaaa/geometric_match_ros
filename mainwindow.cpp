@@ -61,7 +61,7 @@ MainWindow::MainWindow(QWidget *parent)
 
     this->have_crop_img_ = 0;
 
-    this->file_path_ = "/tmp/template.png";
+    this->file_path_ = "/home/hoshina/geometric_match_ros/templates/template.png";
 
     temp_canny_low_ = 50;
     temp_canny_high_ = 100;
@@ -132,7 +132,7 @@ void MainWindow::callbackImage(const sensor_msgs::Image::ConstPtr& msg) {
         show_img = geomatch::write_points(temp_dots_from_center_, temp_dot_num_, show_img, worker->result_pos_.x, worker->result_pos_.y, worker->result_angle_);
         cv::drawMarker(show_img, cv::Point(worker->result_pos_.x,worker->result_pos_.y), cv::Vec3b(150,150,150), cv::MARKER_CROSS);
 
-        std::cout << "result angle:" << worker->result_angle_ << std::endl;
+        //std::cout << "result angle:" << worker->result_angle_ << std::endl;
 
         cv::Point rotate_delta = geomatch::rotate(worker->picking_pos_delta_, geomatch::deg2rad(worker->result_angle_));
 
