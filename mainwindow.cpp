@@ -79,7 +79,7 @@ MainWindow::MainWindow(QWidget *parent)
     ui->horizontalSlider_2->setValue(this->temp_canny_high_);
     ui->horizontalSlider_3->setValue(this->search_canny_low_);
     ui->horizontalSlider_4->setValue(this->search_canny_high_);
-    ui->horizontalSlider_5->setValue(this->match_ratio_th_ * 100);
+    ui->doubleSpinBox->setValue(this->match_ratio_th_);
 
 }
 
@@ -128,7 +128,7 @@ void MainWindow::callbackImage(const sensor_msgs::Image::ConstPtr& msg) {
     worker->search_canny_low_ = this->search_canny_low_;
     worker->search_canny_high_ = this->search_canny_high_;
 
-    std::cout << "match ratio th:" << this->match_ratio_th_ << std::endl;
+    //std::cout << "match ratio th:" << this->match_ratio_th_ << std::endl;
 
     if(worker->result_num_ && (worker->match_ratio_ > this->match_ratio_th_)){
 
@@ -291,7 +291,7 @@ void MainWindow::on_horizontalSlider_4_valueChanged(int value)
     this->search_canny_high_ = value;
 }
 
-void MainWindow::on_horizontalSlider_5_valueChanged(int value)
+void MainWindow::on_doubleSpinBox_valueChanged(double arg1)
 {
-    this->match_ratio_th_ = (double)value/100;
+    this->match_ratio_th_ = arg1;
 }

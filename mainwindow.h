@@ -42,7 +42,7 @@ private slots:
 
     void on_horizontalSlider_4_valueChanged(int value);
 
-    void on_horizontalSlider_5_valueChanged(int value);
+    void on_doubleSpinBox_valueChanged(double arg1);
 
 private:
     Ui::MainWindow *ui;
