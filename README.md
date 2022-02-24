@@ -10,12 +10,12 @@ Search template position from image
 
 /result(geometry_msgs/Pose2D) ... result pixel (x,y) and angle(degree)
 
-## バイナリ
+## Binary
   
 https://github.com/hoshianaaa/geometric_match_ros/releases
   
 
-## 動作環境
+## Environment
 - Ubuntu 20.04 x86_64
 
 ## Image
