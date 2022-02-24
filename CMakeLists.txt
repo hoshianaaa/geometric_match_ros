@@ -36,6 +36,7 @@ include_directories(
  ${OpenCV_INCLUDE_DIRS}
  ${sensor_msgs_INCLUDE_DIRS}
  ${geometry_msgs_INCLUDE_DIRS}
+ include/rapidjson/include
 )
 
 if(ANDROID)

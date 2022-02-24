@@ -27,6 +27,13 @@
 #include <string>
 #include <stdlib.h>
 
+#include "rapidjson/document.h"
+#include "rapidjson/istreamwrapper.h"
+#include "rapidjson/ostreamwrapper.h"
+#include "rapidjson/writer.h"
+
+using namespace rapidjson;
+
 // ファイル存在確認: https://qiita.com/takahiro_itazuri/items/e999ae24ab34b2756b04
 bool checkFileExistence(const std::string& str)
 {
@@ -67,7 +74,14 @@ MainWindow::MainWindow(QWidget *parent)
     //this->file_path_ = "/home/hoshina/geometric_match_ros/templates/template.png";
 
     std::string homedir = getenv("HOME");
-    this->file_path_ = homedir + "/template.png";
+    this->file_path_ = homedir + "/geometric_match_ros-template.png";
+    this->config_path_ = homedir + "/geometric_match_ros-config.json";
+
+    if(checkFileExistence(this->file_path_))
+    {
+        cv::Mat im = cv::imread(this->file_path_);
+        this->set_template_image(im, this->temp_canny_low_, this->temp_canny_high_);
+    }
 
     temp_canny_low_ = 50;
     temp_canny_high_ = 100;
@@ -75,11 +89,28 @@ MainWindow::MainWindow(QWidget *parent)
     search_canny_high_ = 100;
     match_ratio_th_ = 0.8;
 
-    if(checkFileExistence(this->file_path_))
+    Document doc;
+
+    if(checkFileExistence(this->config_path_))
     {
-        cv::Mat im = cv::imread(this->file_path_);
-        this->set_template_image(im, this->temp_canny_low_, this->temp_canny_high_);
+
+        std::ifstream ifs(this->config_path_);
+        IStreamWrapper isw(ifs);
+
+        doc.ParseStream(isw);
+
+        std::cout << "th: " << doc["a"].GetDouble() << std::endl;
+    }else {
+        std::string json = "{\"a\":0.8}";
+
+        doc.Parse(json.c_str());
     }
+
+    std::ofstream ofs(this->config_path_);
+    OStreamWrapper osw(ofs);
+
+    Writer<OStreamWrapper> writer(osw);
+    doc.Accept(writer);
 
     ui->horizontalSlider->setValue(this->temp_canny_low_);
     ui->horizontalSlider_2->setValue(this->temp_canny_high_);
