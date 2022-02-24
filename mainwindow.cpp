@@ -93,7 +93,7 @@ MainWindow::MainWindow(QWidget *parent)
 
         //std::cout << "th: " << doc["match_ratio_th"].GetDouble() << std::endl;
     }else {
-        std::string json = "{\"temp_canny_low\":50,\"temp_canny_high\":100,\"search_canny_low\":50,\"search_canny_high\":100,\"match_ratio_th\":0.8}";
+        std::string json = "{\"picking_pos_delta_x\":0,\"picking_pos_delta_y\":0,\"temp_canny_low\":50,\"temp_canny_high\":100,\"search_canny_low\":50,\"search_canny_high\":100,\"match_ratio_th\":0.8}";
         doc_.Parse(json.c_str());
     }
 
@@ -108,6 +108,8 @@ MainWindow::MainWindow(QWidget *parent)
     search_canny_low_ = doc_["search_canny_low"].GetInt();
     search_canny_high_ = doc_["search_canny_high"].GetInt();
     match_ratio_th_ = doc_["match_ratio_th"].GetDouble();
+    worker->picking_pos_delta_.x = doc_["picking_pos_delta_x"].GetInt();
+    worker->picking_pos_delta_.y = doc_["picking_pos_delta_y"].GetInt();
 
     ui->horizontalSlider->setValue(this->temp_canny_low_);
     ui->horizontalSlider_2->setValue(this->temp_canny_high_);
@@ -115,9 +117,16 @@ MainWindow::MainWindow(QWidget *parent)
     ui->horizontalSlider_4->setValue(this->search_canny_high_);
     ui->doubleSpinBox->setValue(this->match_ratio_th_);
 
+    std::cout << "worker delta" << std::endl;
+    std::cout << worker->picking_pos_delta_.y << std::endl;
+
 }
 
 void MainWindow::saveParam(){
+
+    doc_["picking_pos_delta_x"].SetInt(worker->picking_pos_delta_.x);
+    doc_["picking_pos_delta_y"].SetInt(worker->picking_pos_delta_.y);
+
     doc_["temp_canny_low"].SetInt(temp_canny_low_);
     doc_["temp_canny_high"].SetInt(temp_canny_high_);
     doc_["search_canny_low"].SetInt(search_canny_low_);
@@ -242,6 +251,8 @@ void MainWindow::on_cropButton_clicked()
     cv::Mat mat = cv::Mat(image.height(), image.width(), CV_8UC3, (void*)image.constBits(), image.bytesPerLine());
 
     this->set_template_image(mat, this->temp_canny_low_, this->temp_canny_high_);
+    worker->picking_pos_delta_.x = 0;
+    worker->picking_pos_delta_.y = 0;
     cv::imwrite(this->file_path_, mat);
 }
 
@@ -292,12 +303,12 @@ void MainWindow::set_template_image(cv::Mat mat, int canny_low, int canny_high)
     mat = geomatch::write_points(temp_dots_from_center_, temp_dot_num_, mat, temp_dot_center_x_, temp_dot_center_y_);
     cv::drawMarker(mat, cv::Point(temp_dot_center_x_,temp_dot_center_y_), cv::Vec3b(150,150,150), cv::MARKER_CROSS);
 
-    worker->picking_pos_delta_.x = 0;
-    worker->picking_pos_delta_.y = 0;
-
     this->crop_image_ = mat.clone();
 
-    cv::drawMarker(mat, cv::Point(temp_dot_center_x_,temp_dot_center_y_), cv::Vec3b(200,0,0), cv::MARKER_CROSS);
+    //cv::drawMarker(mat, cv::Point(temp_dot_center_x_,temp_dot_center_y_), cv::Vec3b(200,0,0), cv::MARKER_CROSS);
+
+    cv::drawMarker(mat, cv::Point(temp_dot_center_x_ + worker->picking_pos_delta_.x,temp_dot_center_y_ + worker->picking_pos_delta_.y), cv::Vec3b(200,0,0), cv::MARKER_CROSS);
+
 
     //cv::cvtColor(mat, mat,CV_GRAY2RGB);
 
@@ -332,6 +343,8 @@ void MainWindow::mousePressEvent(QMouseEvent *event)
             pixmap = QPixmap::fromImage(image2);
 
             ui->label->setPixmap(pixmap);
+
+            this->saveParam();
 
         }
 }
