@@ -93,7 +93,7 @@ MainWindow::MainWindow(QWidget *parent)
 
         //std::cout << "th: " << doc["match_ratio_th"].GetDouble() << std::endl;
     }else {
-        std::string json = "{\"match_ratio_th\":0.8}";
+        std::string json = "{\"temp_canny_low\":50,\"temp_canny_high\":100,\"search_canny_low\":50,\"search_canny_high\":100,\"match_ratio_th\":0.8}";
         doc_.Parse(json.c_str());
     }
 
@@ -103,10 +103,10 @@ MainWindow::MainWindow(QWidget *parent)
     Writer<OStreamWrapper> writer(osw);
     doc_.Accept(writer);
 
-    temp_canny_low_ = 50;
-    temp_canny_high_ = 100;
-    search_canny_low_ = 50;
-    search_canny_high_ = 100;
+    temp_canny_low_ = doc_["temp_canny_low"].GetInt();
+    temp_canny_high_ = doc_["temp_canny_high"].GetInt();
+    search_canny_low_ = doc_["search_canny_low"].GetInt();
+    search_canny_high_ = doc_["search_canny_high"].GetInt();
     match_ratio_th_ = doc_["match_ratio_th"].GetDouble();
 
     ui->horizontalSlider->setValue(this->temp_canny_low_);
