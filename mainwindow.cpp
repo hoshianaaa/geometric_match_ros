@@ -83,38 +83,48 @@ MainWindow::MainWindow(QWidget *parent)
         this->set_template_image(im, this->temp_canny_low_, this->temp_canny_high_);
     }
 
-
     if(checkFileExistence(this->config_path_))
     {
 
         std::ifstream ifs(this->config_path_);
         IStreamWrapper isw(ifs);
 
-        doc.ParseStream(isw);
+        doc_.ParseStream(isw);
 
         //std::cout << "th: " << doc["match_ratio_th"].GetDouble() << std::endl;
     }else {
         std::string json = "{\"match_ratio_th\":0.8}";
-        doc.Parse(json.c_str());
+        doc_.Parse(json.c_str());
     }
 
     std::ofstream ofs(this->config_path_);
     OStreamWrapper osw(ofs);
 
     Writer<OStreamWrapper> writer(osw);
-    doc.Accept(writer);
+    doc_.Accept(writer);
 
     temp_canny_low_ = 50;
     temp_canny_high_ = 100;
     search_canny_low_ = 50;
     search_canny_high_ = 100;
-    match_ratio_th_ = doc["match_ratio_th"].GetDouble();
+    match_ratio_th_ = doc_["match_ratio_th"].GetDouble();
 
     ui->horizontalSlider->setValue(this->temp_canny_low_);
     ui->horizontalSlider_2->setValue(this->temp_canny_high_);
     ui->horizontalSlider_3->setValue(this->search_canny_low_);
     ui->horizontalSlider_4->setValue(this->search_canny_high_);
     ui->doubleSpinBox->setValue(this->match_ratio_th_);
+
+}
+
+void MainWindow::saveParam(){
+    doc_["match_ratio_th"].SetDouble(match_ratio_th_);
+
+    std::ofstream ofs(this->config_path_);
+    OStreamWrapper osw(ofs);
+
+    Writer<OStreamWrapper> writer(osw);
+    doc_.Accept(writer);
 
 }
 
@@ -346,4 +356,5 @@ void MainWindow::on_horizontalSlider_4_valueChanged(int value)
 void MainWindow::on_doubleSpinBox_valueChanged(double arg1)
 {
     this->match_ratio_th_ = arg1;
+    this->saveParam();
 }
