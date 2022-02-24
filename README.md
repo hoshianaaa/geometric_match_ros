@@ -1,6 +1,6 @@
 # geometric_match_ros
 
-Search template position from image
+ROS node for search template position from image
 
 ## Subscribe Topics
 
