@@ -14,6 +14,13 @@
 #include <QThread>
 #include "worker.h"
 
+#include "rapidjson/document.h"
+#include "rapidjson/istreamwrapper.h"
+#include "rapidjson/ostreamwrapper.h"
+#include "rapidjson/writer.h"
+
+using namespace rapidjson;
+
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
 QT_END_NAMESPACE
@@ -29,6 +36,7 @@ public:
     bool have_crop_img_;
     std::string file_path_, config_path_;
     void set_template_image(cv::Mat mat, int canny_low=50, int canny_high=100);
+    Document doc;
 
 private slots:
     void on_pushButton_clicked();

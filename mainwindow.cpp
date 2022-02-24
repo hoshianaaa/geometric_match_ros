@@ -83,13 +83,6 @@ MainWindow::MainWindow(QWidget *parent)
         this->set_template_image(im, this->temp_canny_low_, this->temp_canny_high_);
     }
 
-    temp_canny_low_ = 50;
-    temp_canny_high_ = 100;
-    search_canny_low_ = 50;
-    search_canny_high_ = 100;
-    match_ratio_th_ = 0.8;
-
-    Document doc;
 
     if(checkFileExistence(this->config_path_))
     {
@@ -99,10 +92,9 @@ MainWindow::MainWindow(QWidget *parent)
 
         doc.ParseStream(isw);
 
-        std::cout << "th: " << doc["a"].GetDouble() << std::endl;
+        //std::cout << "th: " << doc["match_ratio_th"].GetDouble() << std::endl;
     }else {
-        std::string json = "{\"a\":0.8}";
-
+        std::string json = "{\"match_ratio_th\":0.8}";
         doc.Parse(json.c_str());
     }
 
@@ -111,6 +103,12 @@ MainWindow::MainWindow(QWidget *parent)
 
     Writer<OStreamWrapper> writer(osw);
     doc.Accept(writer);
+
+    temp_canny_low_ = 50;
+    temp_canny_high_ = 100;
+    search_canny_low_ = 50;
+    search_canny_high_ = 100;
+    match_ratio_th_ = doc["match_ratio_th"].GetDouble();
 
     ui->horizontalSlider->setValue(this->temp_canny_low_);
     ui->horizontalSlider_2->setValue(this->temp_canny_high_);
