@@ -6,7 +6,7 @@ Search template position from image
 
 /usb_cam/image_raw(sensor_msgs/Image)
 
-## PUblished Topics
+## Published Topics
 
 /result(geometry_msgs/Pose2D) ... result pixel (x,y) and angle(degree)
 
