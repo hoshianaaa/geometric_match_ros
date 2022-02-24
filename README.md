@@ -20,6 +20,4 @@ https://github.com/hoshianaaa/geometric_match_ros/releases
 
 ## Image
 
-![Screenshot from 2022-02-24 11-48-59](https://user-images.githubusercontent.com/40942409/155448933-bc729c67-d6ee-4c7a-8d5a-7084ab71ef4d.png)
-
 ![Screenshot from 2022-02-24 11-48-59](https://user-images.githubusercontent.com/40942409/155449512-50faa1c6-fefb-4a9a-8dce-6a08361d1429.png)
