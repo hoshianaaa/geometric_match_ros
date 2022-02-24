@@ -118,6 +118,11 @@ MainWindow::MainWindow(QWidget *parent)
 }
 
 void MainWindow::saveParam(){
+    doc_["temp_canny_low"].SetInt(temp_canny_low_);
+    doc_["temp_canny_high"].SetInt(temp_canny_high_);
+    doc_["search_canny_low"].SetInt(search_canny_low_);
+    doc_["search_canny_high"].SetInt(search_canny_high_);
+
     doc_["match_ratio_th"].SetDouble(match_ratio_th_);
 
     std::ofstream ofs(this->config_path_);
@@ -335,22 +340,30 @@ void MainWindow::on_horizontalSlider_valueChanged(int value)
 {
     this->temp_canny_low_ = value;
     if(this->template_img_.data != NULL)this->set_template_image(this->template_img_, this->temp_canny_low_, this->temp_canny_high_);
+    this->saveParam();
+
 }
 
 void MainWindow::on_horizontalSlider_2_valueChanged(int value)
 {
     this->temp_canny_high_ = value;
     if(this->template_img_.data != NULL)this->set_template_image(this->template_img_, this->temp_canny_low_, this->temp_canny_high_);
+    this->saveParam();
+
 }
 
 void MainWindow::on_horizontalSlider_3_valueChanged(int value)
 {
     this->search_canny_low_ = value;
+    this->saveParam();
+
 }
 
 void MainWindow::on_horizontalSlider_4_valueChanged(int value)
 {
     this->search_canny_high_ = value;
+    this->saveParam();
+
 }
 
 void MainWindow::on_doubleSpinBox_valueChanged(double arg1)
