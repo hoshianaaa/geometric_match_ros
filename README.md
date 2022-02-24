@@ -10,7 +10,8 @@
 
 ## Published Topics
 
-- /result(geometry_msgs/Pose2D) ・・・ result pixel (x,y) and angle(degree)
+- /result(geometry_msgs/Pose2D)
+result pixel (x,y) and angle(degree)
 
 ## Binary
   
