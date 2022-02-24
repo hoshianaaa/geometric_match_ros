@@ -139,7 +139,7 @@ void MainWindow::callbackImage(const sensor_msgs::Image::ConstPtr& msg) {
     if(worker->result_num_ && (worker->match_ratio_ > this->match_ratio_th_)){
 
         show_img = geomatch::write_points(temp_dots_from_center_, temp_dot_num_, show_img, worker->result_pos_.x, worker->result_pos_.y, worker->result_angle_);
-        cv::drawMarker(show_img, cv::Point(worker->result_pos_.x,worker->result_pos_.y), cv::Vec3b(150,150,150), cv::MARKER_CROSS);
+        cv::drawMarker(show_img, cv::Point(worker->result_pos_.x,worker->result_pos_.y), cv::Vec3b(150,150,150), cv::MARKER_CROSS);        
 
         //std::cout << "result angle:" << worker->result_angle_ << std::endl;
 
@@ -155,7 +155,24 @@ void MainWindow::callbackImage(const sensor_msgs::Image::ConstPtr& msg) {
         msg.theta = worker->result_angle_;
         this->result_pub_.publish(msg);
 
+        cv::putText(show_img,
+                    "Found Score:" + std::to_string(worker->match_ratio_),
+                    cv::Point(10,30), // Coordinates (Bottom-left corner of the text string in the image)
+                    cv::FONT_HERSHEY_COMPLEX_SMALL, // Font
+                    1.0, // Scale. 2.0 = 2x bigger
+                    cv::Scalar(0,255,0), // BGR Color
+                    1, // Line Thickness (Optional)
+                    cv:: LINE_AA); // Anti-alias (Optional, see version note)
+
     }else{
+        cv::putText(show_img,
+                    "Not found Score:" + std::to_string(worker->match_ratio_),
+                    cv::Point(10,30), // Coordinates (Bottom-left corner of the text string in the image)
+                    cv::FONT_HERSHEY_COMPLEX_SMALL, // Font
+                    1.0, // Scale. 2.0 = 2x bigger
+                    cv::Scalar(255,0,0), // BGR Color
+                    1, // Line Thickness (Optional)
+                    cv:: LINE_AA); // Anti-alias (Optional, see version note)
         //cv::cvtColor(mat, mat,CV_GRAY2RGB);
     }
 
