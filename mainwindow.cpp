@@ -24,6 +24,9 @@
 #include<fstream>
 #include<iostream>
 
+#include <string>
+#include <stdlib.h>
+
 // ファイル存在確認: https://qiita.com/takahiro_itazuri/items/e999ae24ab34b2756b04
 bool checkFileExistence(const std::string& str)
 {
@@ -61,7 +64,10 @@ MainWindow::MainWindow(QWidget *parent)
 
     this->have_crop_img_ = 0;
 
-    this->file_path_ = "/home/hoshina/geometric_match_ros/templates/template.png";
+    //this->file_path_ = "/home/hoshina/geometric_match_ros/templates/template.png";
+
+    std::string homedir = getenv("HOME");
+    this->file_path_ = homedir + "/template.png";
 
     temp_canny_low_ = 50;
     temp_canny_high_ = 100;
