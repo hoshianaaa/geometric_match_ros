@@ -20,3 +20,6 @@ https://github.com/hoshianaaa/geometric_match_ros/releases
 ## Environment
 - Ubuntu 20.04 x86_64
 
+## Demo Video
+
+https://youtu.be/o8ekNBfvUyo
