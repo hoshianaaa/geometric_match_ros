@@ -2,8 +2,7 @@
 
 ROS node for search template position from input image
 
-![Screenshot from 2022-02-24 11-48-59](https://user-images.githubusercontent.com/40942409/155449512-50faa1c6-fefb-4a9a-8dce-6a08361d1429.png)
-
+<img src="https://user-images.githubusercontent.com/40942409/155449910-6d3edcda-0c2a-4235-8ec6-b612bd1ed6de.png" width="100">
 
 ## Subscribe Topics
 
