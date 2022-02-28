@@ -23,3 +23,7 @@ https://github.com/hoshianaaa/geometric_match_ros/releases
 ## Demo Video
 
 https://youtu.be/o8ekNBfvUyo
+
+## Reference
+
+https://www.codeproject.com/Articles/99457/Edge-Based-Template-Matching
