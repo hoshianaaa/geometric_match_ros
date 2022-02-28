@@ -1,6 +1,6 @@
 # geometric_match_ros
 
-- ROS node for search template position from input image
+- ROS node for edge based template matching.
 
 <img src="https://user-images.githubusercontent.com/40942409/155449910-6d3edcda-0c2a-4235-8ec6-b612bd1ed6de.png" width="300">
 
