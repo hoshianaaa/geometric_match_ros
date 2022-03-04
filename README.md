@@ -12,7 +12,19 @@
 
 - /result(geometry_msgs/Pose2D) ... result pixel (x,y) and angle(degree)
 
-## Binary
+## Build
+
+rosのインストール
+
+```
+sudo apt remove rapidjson-dev
+mkdir build
+cd build
+cmake ..
+make
+```
+
+## Binary(※現在エラー出て使えない)
   
 https://github.com/hoshianaaa/geometric_match_ros/releases
   
