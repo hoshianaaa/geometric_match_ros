@@ -14,10 +14,8 @@
 
 ## Build
 
-rosのインストール
-
 ```
-sudo apt remove rapidjson-dev
+sudo apt install rapidjson-dev
 mkdir build
 cd build
 cmake ..
