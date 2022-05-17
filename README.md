@@ -14,7 +14,8 @@
 
 ## Build
 
-rosのインストール
+- 1.rosインストール
+- 2.packageインストール&ビルド
 
 ```
 sudo apt remove rapidjson-dev
