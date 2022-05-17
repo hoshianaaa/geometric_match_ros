@@ -10,7 +10,7 @@ def operator():
     filepath = sys.argv[1]
 
     rospy.init_node('image_publisher', anonymous=True)
-    pub = rospy.Publisher('image', Image, queue_size=10)
+    pub = rospy.Publisher('usb_cam/image_raw', Image, queue_size=10)
     # read image
     #filepath = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'lena.png')
     im = cv2.imread(filepath, cv2.IMREAD_COLOR)
