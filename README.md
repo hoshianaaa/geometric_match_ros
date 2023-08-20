@@ -37,3 +37,8 @@ https://youtu.be/o8ekNBfvUyo
 ## Reference
 
 https://www.codeproject.com/Articles/99457/Edge-Based-Template-Matching
+
+## 対外発表
+
+- ROS Japan UG #45 ROS10周年 LT大会：「形状マッチソフトの作成」 https://www.youtube.com/watch?v=dMTucT7MBys
+
